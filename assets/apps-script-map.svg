@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380" role="img" aria-labelledby="title desc">
+  <title id="title">Apps Script 專案設定與部署示意</title>
+  <desc id="desc">左側顯示 Project Settings 與 Change project，右側顯示 Deploy 到 Web app 的位置。</desc>
+  <rect width="760" height="380" rx="16" fill="#fafafa"/>
+  <rect x="24" y="24" width="712" height="332" rx="12" fill="#fff" stroke="#dedede"/>
+  <rect x="24" y="24" width="712" height="48" rx="12" fill="#f6f6f6"/>
+  <text x="48" y="54" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#222">Apps Script · Travel Workspace Dashboard</text>
+  <rect x="46" y="94" width="170" height="230" rx="8" fill="#fafafa" stroke="#e7e7e7"/>
+  <text x="62" y="124" font-family="Arial, sans-serif" font-size="12" fill="#666">Overview</text>
+  <text x="62" y="154" font-family="Arial, sans-serif" font-size="12" fill="#666">Editor</text>
+  <rect x="56" y="170" width="150" height="34" rx="6" fill="#ededed"/>
+  <text x="70" y="192" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#222">Project Settings</text>
+  <circle cx="194" cy="187" r="13" fill="#222"/><text x="190" y="192" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#fff">1</text>
+  <rect x="240" y="94" width="470" height="120" rx="8" fill="#fff" stroke="#dedede"/>
+  <text x="260" y="122" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222">Google Cloud Project</text>
+  <text x="260" y="151" font-family="Arial, sans-serif" font-size="12" fill="#777">Project number</text>
+  <text x="388" y="151" font-family="Arial, sans-serif" font-size="12" fill="#222">123456789012</text>
+  <rect x="260" y="168" width="108" height="30" rx="6" fill="#222"/>
+  <text x="278" y="188" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">Change project</text>
+  <circle cx="684" cy="183" r="13" fill="#222"/><text x="680" y="188" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#fff">2</text>
+  <rect x="240" y="236" width="470" height="88" rx="8" fill="#fbfbfb" stroke="#dedede"/>
+  <rect x="560" y="252" width="118" height="34" rx="6" fill="#222"/>
+  <text x="585" y="274" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">Deploy ▾</text>
+  <text x="260" y="266" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222">程式完成後</text>
+  <text x="260" y="291" font-family="Arial, sans-serif" font-size="12" fill="#666">Deploy → New deployment → Web app</text>
+  <circle cx="684" cy="307" r="13" fill="#222"/><text x="680" y="312" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#fff">3</text>
+  <text x="46" y="348" font-family="Arial, sans-serif" font-size="12" fill="#666">順序：先綁 Project number → Run 測試授權 → 最後才 Deploy。</text>
+</svg>
