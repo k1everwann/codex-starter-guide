@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" role="img" aria-labelledby="title desc">
+  <title id="title">Google Cloud Project 導覽示意</title>
+  <desc id="desc">示意在 Google Cloud Console 建立專案後，找到 Project name、Project ID 和 Project number。</desc>
+  <rect width="760" height="360" rx="16" fill="#fafafa"/>
+  <rect x="24" y="24" width="712" height="312" rx="12" fill="#ffffff" stroke="#dedede"/>
+  <rect x="24" y="24" width="712" height="48" rx="12" fill="#f6f6f6"/>
+  <circle cx="48" cy="48" r="6" fill="#bdbdbd"/><circle cx="68" cy="48" r="6" fill="#d1d1d1"/><circle cx="88" cy="48" r="6" fill="#e0e0e0"/>
+  <text x="120" y="53" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#252525">Google Cloud Console</text>
+  <rect x="46" y="94" width="168" height="216" rx="8" fill="#fafafa" stroke="#ececec"/>
+  <text x="62" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#333">Menu</text>
+  <text x="62" y="151" font-family="Arial, sans-serif" font-size="12" fill="#666">IAM &amp; Admin</text>
+  <text x="62" y="178" font-family="Arial, sans-serif" font-size="12" fill="#666">APIs &amp; Services</text>
+  <text x="62" y="205" font-family="Arial, sans-serif" font-size="12" fill="#666">Google Auth Platform</text>
+  <rect x="238" y="94" width="472" height="68" rx="8" fill="#fbfbfb" stroke="#e1e1e1"/>
+  <text x="258" y="119" font-family="Arial, sans-serif" font-size="12" fill="#777">Project selector</text>
+  <text x="258" y="145" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#222">Travel Workspace Lab ▾</text>
+  <circle cx="684" cy="128" r="14" fill="#222"/><text x="679" y="133" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">1</text>
+  <rect x="238" y="180" width="472" height="130" rx="8" fill="#ffffff" stroke="#dedede"/>
+  <text x="258" y="206" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222">Project settings</text>
+  <text x="258" y="235" font-family="Arial, sans-serif" font-size="12" fill="#777">Project name</text>
+  <text x="405" y="235" font-family="Arial, sans-serif" font-size="12" fill="#222">Travel Workspace Lab</text>
+  <text x="258" y="261" font-family="Arial, sans-serif" font-size="12" fill="#777">Project ID</text>
+  <text x="405" y="261" font-family="Arial, sans-serif" font-size="12" fill="#222">travel-workspace-lab</text>
+  <text x="258" y="287" font-family="Arial, sans-serif" font-size="12" fill="#777">Project number</text>
+  <rect x="397" y="269" width="177" height="28" rx="5" fill="#f2f2f2"/>
+  <text x="408" y="288" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222">123456789012</text>
+  <circle cx="684" cy="282" r="14" fill="#222"/><text x="679" y="287" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">2</text>
+  <text x="238" y="330" font-family="Arial, sans-serif" font-size="12" fill="#666">先記住：Apps Script 綁定 Standard Project 時要貼的是 Project number。</text>
+</svg>
