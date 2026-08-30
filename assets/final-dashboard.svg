@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Travel Workspace Dashboard 完成示意</title>
+  <desc id="desc">一個簡單的旅遊工作台，左邊列出 Gmail 郵件，右邊可以搜尋 Google Drive 檔案。</desc>
+  <rect width="760" height="420" rx="16" fill="#fafafa"/>
+  <rect x="24" y="24" width="712" height="372" rx="12" fill="#fff" stroke="#dedede"/>
+  <rect x="24" y="24" width="712" height="44" rx="12" fill="#f6f6f6"/>
+  <circle cx="46" cy="46" r="5" fill="#c6c6c6"/><circle cx="64" cy="46" r="5" fill="#d5d5d5"/><circle cx="82" cy="46" r="5" fill="#e2e2e2"/>
+  <text x="46" y="104" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#222">Travel Workspace Dashboard</text>
+  <text x="46" y="128" font-family="Arial, sans-serif" font-size="12" fill="#777">你的旅遊信件與 Drive 文件，放在同一個簡單介面。</text>
+  <rect x="46" y="152" width="668" height="44" rx="8" fill="#fbfbfb" stroke="#e2e2e2"/>
+  <text x="62" y="179" font-family="Arial, sans-serif" font-size="12" fill="#999">搜尋 Drive：hotel / booking / 東京</text>
+  <rect x="598" y="159" width="102" height="30" rx="6" fill="#222"/>
+  <text x="618" y="179" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff">搜尋 Drive</text>
+  <rect x="46" y="218" width="314" height="150" rx="8" fill="#fff" stroke="#e1e1e1"/>
+  <text x="62" y="245" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222">Gmail · 最近旅遊郵件</text>
+  <line x1="62" y1="258" x2="344" y2="258" stroke="#ececec"/>
+  <text x="62" y="281" font-family="Arial, sans-serif" font-size="12" fill="#333">Flight confirmation · Taipei → Tokyo</text>
+  <text x="62" y="300" font-family="Arial, sans-serif" font-size="11" fill="#888">airline@example.com · 2026/08/20</text>
+  <line x1="62" y1="314" x2="344" y2="314" stroke="#ececec"/>
+  <text x="62" y="337" font-family="Arial, sans-serif" font-size="12" fill="#333">Hotel booking · Shinjuku</text>
+  <text x="62" y="356" font-family="Arial, sans-serif" font-size="11" fill="#888">booking@example.com · 2026/08/18</text>
+  <rect x="382" y="218" width="332" height="150" rx="8" fill="#fff" stroke="#e1e1e1"/>
+  <text x="398" y="245" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#222">Google Drive · 搜尋結果</text>
+  <line x1="398" y1="258" x2="698" y2="258" stroke="#ececec"/>
+  <text x="398" y="281" font-family="Arial, sans-serif" font-size="12" fill="#333">Tokyo-hotel-booking.pdf</text>
+  <text x="398" y="300" font-family="Arial, sans-serif" font-size="11" fill="#888">PDF · updated 2026/08/15</text>
+  <line x1="398" y1="314" x2="698" y2="314" stroke="#ececec"/>
+  <text x="398" y="337" font-family="Arial, sans-serif" font-size="12" fill="#333">Japan-trip-plan.docx</text>
+  <text x="398" y="356" font-family="Arial, sans-serif" font-size="11" fill="#888">Document · updated 2026/08/12</text>
+  <text x="46" y="389" font-family="Arial, sans-serif" font-size="11" fill="#888">重點不是長得多厲害，而是資料真的來自你授權的 Google 帳號。</text>
+</svg>
