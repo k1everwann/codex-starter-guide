@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="從 GCP Project、API、OAuth 到 Apps Script，完成自己的 Gmail + Google Drive 網站。">
+  <title>Google Workspace Hands-on Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="mobile-header">
+    <a href="./">← 工程入門指南</a>
+    <a href="https://github.com/k1everwann/codex-starter-guide/tree/main/labs/google-workspace-webapp" target="_blank" rel="noreferrer">Lab source ↗</a>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span>Hands-on Lab</span>
+        <strong>Gmail + Drive Web App</strong>
+      </div>
+      <nav aria-label="Lab 章節">
+        <a href="#goal">成果</a>
+        <a href="#gcp">1. GCP Project</a>
+        <a href="#api">2. Enable API</a>
+        <a href="#auth">3. OAuth</a>
+        <a href="#apps-script">4. Apps Script</a>
+        <a href="#code">5. Frontend / Backend</a>
+        <a href="#authorize">6. 第一次授權</a>
+        <a href="#deploy">7. Deploy</a>
+        <a href="#test">8. 測試功能</a>
+        <a href="#debug">9. Debug</a>
+        <a href="#next">10. 下一步</a>
+      </nav>
+      <div class="sidebar-links">
+        <a href="./">Main guide</a>
+        <a href="./labs/google-workspace-webapp/README.md" target="_blank">README ↗</a>
+      </div>
+    </aside>
+
+    <main class="content" id="top">
+      <section class="intro" id="goal">
+        <p class="kicker">Hands-on Lab 01</p>
+        <h1>做一個 Gmail + Google Drive 網站</h1>
+        <p class="intro-text">從零開始建立 GCP Project、啟用 API、設定 OAuth、連接 Apps Script，最後得到一個真的能讀自己 Gmail 與 Google Drive 的 Travel Workspace Dashboard。</p>
+
+        <pre class="diagram">Browser
+   │
+   │ google.script.run
+   ▼
+Apps Script Backend
+   ├────────► Gmail
+   └────────► Google Drive
+
+Apps Script
+   │
+   ▼
+Standard GCP Project
+   ├─ Gmail API
+   ├─ Google Drive API
+   └─ Google Auth / OAuth</pre>
+
+        <div class="note">
+          <strong>完成標準</strong>
+          <span>你能在自己的 Web App 按下按鈕看到旅遊相關 Gmail，並輸入關鍵字搜尋自己的 Drive 檔案。</span>
+        </div>
+      </section>
+
+      <section id="gcp">
+        <div class="section-label">01</div>
+        <h2>建立 Standard GCP Project</h2>
+        <p class="section-lead">Apps Script 本來會自動配一個 Default Cloud Project。這次故意自己建立 Standard Project，因為我們要真正看懂 API、OAuth 與 Cloud 設定在哪裡。</p>
+
+        <ol>
+          <li>開啟 <a href="https://console.cloud.google.com/" target="_blank" rel="noreferrer">Google Cloud Console ↗</a>。</li>
+          <li>上方 Project selector → <strong>New Project</strong>。</li>
+          <li>教學範例名稱可填 <code>Travel Workspace Lab</code>。</li>
+          <li>建立完成後，進 <strong>IAM &amp; Admin → Settings</strong>。</li>
+          <li>記下 <strong>Project ID</strong> 與 <strong>Project number</strong>。</li>
+        </ol>
+
+        <table>
+          <thead><tr><th>名稱</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td>Project name</td><td>給人看的名稱，可以修改。</td></tr>
+            <tr><td>Project ID</td><td>Cloud 裡的唯一字串。</td></tr>
+            <tr><td>Project number</td><td>純數字。稍後 Apps Script 的 Change project 要貼這個。</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note quiet"><strong>常見錯誤</strong><span>Apps Script 要的是 <code>Project number</code>，不是 Project ID。</span></div>
+      </section>
+
+      <section id="api">
+        <div class="section-label">02</div>
+        <h2>Enable Gmail API 與 Google Drive API</h2>
+        <p class="section-lead">先告訴 Google：這個 Cloud Project 預計會使用哪些 Google Workspace 服務。</p>
+
+        <ol>
+          <li>確認 Cloud Console 上方選到剛建立的 Project。</li>
+          <li><strong>APIs &amp; Services → Library</strong>。</li>
+          <li>搜尋 <strong>Gmail API</strong> → <strong>Enable</strong>。</li>
+          <li>回 Library，搜尋 <strong>Google Drive API</strong> → <strong>Enable</strong>。</li>
+          <li>到 <strong>Enabled APIs &amp; services</strong> 確認兩個 API 都存在。</li>
+        </ol>
+
+        <pre class="diagram">GCP Project
+   ├─ Gmail API        ON
+   ├─ Google Drive API ON
+   ├─ Calendar API     OFF
+   └─ ...</pre>
+
+        <p>可以把 Enable API 想成：不是「有 Google 帳號，所以任何程式都能用 Gmail」，而是這個 Project 明確宣告自己需要哪些服務。</p>
+      </section>
+
+      <section id="auth">
+        <div class="section-label">03</div>
+        <h2>設定 Google Auth / OAuth</h2>
+        <p class="section-lead">API 是「服務能不能用」，OAuth 則是「哪個使用者允許這個 App 拿哪些權限」。</p>
+
+        <h3>Branding</h3>
+        <ol>
+          <li>Cloud Console → <strong>Google Auth Platform</strong>。</li>
+          <li>若尚未設定，按 <strong>Get Started</strong>。</li>
+          <li>App name：<code>Travel Workspace Dashboard</code>。</li>
+          <li>User support email / Contact email：填自己的 Google 帳號。</li>
+        </ol>
+
+        <h3>Audience</h3>
+        <table>
+          <thead><tr><th>情況</th><th>選擇</th></tr></thead>
+          <tbody>
+            <tr><td>公司 / 學校 Workspace，只給組織內</td><td>可能可選 Internal</td></tr>
+            <tr><td>一般個人 Gmail</td><td>External，開發階段先維持 Testing</td></tr>
+          </tbody>
+        </table>
+
+        <p>如果是 External，進 <strong>Audience → Test users → Add users</strong>，把自己加入測試使用者。</p>
+
+        <h3>Data Access / Scopes</h3>
+        <p>Scope 是「這個 App 到底要讀什麼、能不能寫」。原則是最小權限：</p>
+        <pre class="diagram">能 Read 就不要先要 Write
+能拿必要資料就不要拿整個帳號權限</pre>
+
+        <div class="note quiet">
+          <strong>這個 Lab 不用自己建立 OAuth Client ID。</strong>
+          <span>因為程式使用 Apps Script built-in services：<code>GmailApp</code> / <code>DriveApp</code>。如果之後改成 Python / Node 直接呼叫 Gmail REST API / Drive REST API，才進一步建立 OAuth Client ID / Client Secret。</span>
+        </div>
+      </section>
+
+      <section id="apps-script">
+        <div class="section-label">04</div>
+        <h2>建立 Apps Script 並綁定 GCP Project</h2>
+
+        <ol>
+          <li>開啟 <a href="https://script.google.com/" target="_blank" rel="noreferrer">Apps Script ↗</a> → <strong>New project</strong>。</li>
+          <li>名稱可填 <code>Travel Workspace Dashboard</code>。</li>
+          <li>左側 <strong>Project Settings</strong>。</li>
+          <li>找到 <strong>Google Cloud Platform (GCP) Project</strong> → <strong>Change project</strong>。</li>
+          <li>貼上前面記下的 <strong>Project number</strong>。</li>
+          <li>按 <strong>Set project</strong>。</li>
+        </ol>
+
+        <pre class="diagram">Apps Script Project
+        │
+        ▼
+Standard GCP Project
+        │
+        ├─ Gmail API
+        ├─ Drive API
+        └─ OAuth settings</pre>
+
+        <p>這一步是把「程式碼專案」跟「Cloud 權限 / API 專案」連在一起。</p>
+      </section>
+
+      <section id="code">
+        <div class="section-label">05</div>
+        <h2>加入 Backend 與 Frontend</h2>
+
+        <h3>Backend：Code.gs</h3>
+        <p>把 Apps Script 原本的 <code>Code.gs</code> 換成 Repo 裡的：</p>
+        <p><a href="https://github.com/k1everwann/codex-starter-guide/blob/main/labs/google-workspace-webapp/Code.gs" target="_blank" rel="noreferrer">查看 Code.gs ↗</a></p>
+
+        <table>
+          <thead><tr><th>Function</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td><code>doGet()</code></td><td>Browser 開 Web App 時回傳 <code>Index.html</code>。</td></tr>
+            <tr><td><code>getTravelEmails()</code></td><td>用 GmailApp 找旅遊相關信件。</td></tr>
+            <tr><td><code>searchDriveFiles(keyword)</code></td><td>用 DriveApp 搜尋自己的 Drive。</td></tr>
+            <tr><td><code>testAccess()</code></td><td>第一次用來測授權與服務是否正常。</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Frontend：Index.html</h3>
+        <ol>
+          <li>Apps Script 左側 <strong>＋ → HTML</strong>。</li>
+          <li>檔名輸入 <code>Index</code>。</li>
+          <li>貼入 Repo 的 <a href="https://github.com/k1everwann/codex-starter-guide/blob/main/labs/google-workspace-webapp/Index.html" target="_blank" rel="noreferrer">Index.html ↗</a>。</li>
+        </ol>
+
+        <pre class="diagram">Index.html
+= Frontend
+= 畫面、按鈕、顯示結果
+
+Code.gs
+= Backend
+= Gmail / Drive 存取與資料整理</pre>
+
+        <h3>前端怎麼叫後端？</h3>
+        <pre><code>google.script.run
+  .withSuccessHandler(renderEmails)
+  .withFailureHandler(...)
+  .getTravelEmails();</code></pre>
+
+        <pre class="diagram">使用者按按鈕
+     ↓
+Index.html
+     ↓  google.script.run
+Code.gs
+     ↓
+GmailApp / DriveApp
+     ↓
+Google Workspace</pre>
+
+        <p>Browser 並沒有直接拿到 Gmail 權限。它只是請 Backend 做事。</p>
+      </section>
+
+      <section id="authorize">
+        <div class="section-label">06</div>
+        <h2>第一次授權</h2>
+
+        <ol>
+          <li>Apps Script 上方 function 下拉選單選 <code>testAccess</code>。</li>
+          <li>按 <strong>Run</strong>。</li>
+          <li>第一次會出現 Google 授權流程。</li>
+          <li>確認帳號與要求的權限，再 Allow。</li>
+          <li>看 Execution log 是否有紅色 Error。</li>
+        </ol>
+
+        <pre class="diagram">Authentication
+= 你是誰？
+
+Authorization
+= 這個 App 可以拿你的哪些權限？</pre>
+      </section>
+
+      <section id="deploy">
+        <div class="section-label">07</div>
+        <h2>Deploy 成真正的 Web App</h2>
+
+        <ol>
+          <li>右上角 <strong>Deploy → New deployment</strong>。</li>
+          <li>Type 選 <strong>Web app</strong>。</li>
+          <li>私人練習先把存取範圍限制給自己。</li>
+          <li>Deploy 後取得 <code>https://script.google.com/.../exec</code>。</li>
+        </ol>
+
+        <h3>Execute as 是什麼？</h3>
+        <p>它決定 Backend 用誰的 Google 身分去讀資料。</p>
+
+        <pre class="diagram">誰能開網站
+      ≠
+Backend 用誰的 Google 權限執行</pre>
+
+        <div class="note quiet"><strong>安全</strong><span>不要把一個「以你的 Gmail 權限執行」的 Web App 隨便公開給所有人。練習階段先只開給自己。</span></div>
+      </section>
+
+      <section id="test">
+        <div class="section-label">08</div>
+        <h2>測試 Gmail 與 Drive</h2>
+
+        <h3>Google Drive</h3>
+        <ol>
+          <li>開 Web App URL。</li>
+          <li>輸入一個確定存在的檔名關鍵字，例如 <code>booking</code> 或 <code>東京</code>。</li>
+          <li>按 <strong>搜尋 Drive</strong>。</li>
+          <li>應該看到檔名、MIME type、更新日期與 Drive link。</li>
+        </ol>
+
+        <h3>Gmail</h3>
+        <ol>
+          <li>按 <strong>載入最近旅遊郵件</strong>。</li>
+          <li>範例搜尋最近一年、主旨含 flight / hotel / booking / reservation / ticket 的郵件。</li>
+          <li>為了隱私，只回傳 Subject、From、Date，不把整封信送到 Browser。</li>
+        </ol>
+
+        <p>如果你的信件是中文，可以回 Code.gs 修改 query，例如：</p>
+        <pre><code>newer_than:365d {subject:訂房 subject:機票 subject:預約}</code></pre>
+      </section>
+
+      <section id="debug">
+        <div class="section-label">09</div>
+        <h2>Debug：先找是哪一層壞了</h2>
+
+        <table>
+          <thead><tr><th>層</th><th>先看哪裡</th><th>常見問題</th></tr></thead>
+          <tbody>
+            <tr><td>Browser</td><td>DevTools → Console</td><td>按鈕沒反應、JavaScript error、DOM 問題</td></tr>
+            <tr><td>Apps Script</td><td>Executions / Execution log</td><td>Function exception、Gmail / Drive query</td></tr>
+            <tr><td>GCP / OAuth</td><td>Cloud Console</td><td>API 沒 Enable、綁錯 Project Number、Test user、Permission</td></tr>
+          </tbody>
+        </table>
+
+        <pre><code>先不要修改程式。
+
+Expected:
+搜尋 Drive 應該回傳檔案。
+
+Actual:
+畫面顯示 permission error。
+
+請依序分析：
+1. Browser
+2. Apps Script execution
+3. GCP API enablement
+4. OAuth / permissions
+
+先找 root cause，再提出修改方案。</code></pre>
+      </section>
+
+      <section id="next">
+        <div class="section-label">10</div>
+        <h2>下一步不要重做 Demo，直接擴充</h2>
+
+        <ol class="roadmap">
+          <li><span>A</span><div><strong>Gmail 搜尋框</strong><p>讓使用者自己輸入 Gmail query。</p></div></li>
+          <li><span>B</span><div><strong>Drive 資料夾模式</strong><p>顯示某個旅行資料夾裡的檔案。</p></div></li>
+          <li><span>C</span><div><strong>Trip Card</strong><p>把 Gmail 訂位信與 Drive 文件整理成同一張旅行卡片。</p></div></li>
+          <li><span>D</span><div><strong>AI Summary</strong><p>再接 AI API，讓 Backend 摘要旅遊信件。</p></div></li>
+          <li><span>E</span><div><strong>Google Calendar</strong><p>把航班與住宿日期加入 Calendar。</p></div></li>
+        </ol>
+
+        <pre><code>請先閱讀目前專案，不要直接修改。
+
+我要新增「Trip Card」。
+資料來源是 Gmail 與 Drive。
+
+先提出：
+- 資料結構
+- Backend function
+- Frontend 要改哪裡
+- 權限是否需要增加
+- 測試方式
+
+我確認後再實作。</code></pre>
+
+        <div class="note">
+          <strong>你現在已經碰過完整的 Web App 核心。</strong>
+          <span>Frontend、Backend、GCP Project、API enablement、OAuth、Permissions、Gmail、Drive、Function call、Error handling、Deploy。</span>
+        </div>
+      </section>
+
+      <footer>
+        <span>Google Workspace Hands-on Lab</span>
+        <a href="./">回工程入門指南 →</a>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
