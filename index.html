@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="用一個旅遊網站，理解 Codex、Claude Code、GitHub、Notion、Python、SQLite、API 與 AI 工程工作流。" />
+  <title>Codex / Claude 工程入門指南</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">Codex / Claude Starter</a>
+    <nav aria-label="主要導覽">
+      <a href="#map">全貌</a>
+      <a href="#ai">AI 模型與模式</a>
+      <a href="#workflow">工作流</a>
+      <a href="#stack">工具</a>
+      <a href="#python">Python</a>
+      <a href="#connector">Connector</a>
+      <a href="#lesson">教學順序</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="eyebrow">FROM VIBE CODING TO A REAL PROJECT</div>
+      <h1>你已經用 AI 做出旅遊網站。<br />下一步是學會管理一個真正的專案。</h1>
+      <p class="lead">這不是語法課。用你已經做好的旅遊網站，理解 Codex / Claude、Git、GitHub、Notion、Python、SQLite、API、Connector，以及工程師真正的工作流程。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#map">先看全貌</a>
+        <a class="button" href="#lesson">照教學順序做</a>
+      </div>
+      <div class="callout">
+        <strong>先記一句：</strong>AI 幫你「寫出網頁」只是起點；真正的工程能力，是能把需求、規則、程式碼、資料、版本與部署串成一套可維護的流程。
+      </div>
+    </section>
+
+    <section id="map" class="section">
+      <div class="section-head">
+        <span>01</span>
+        <div><h2>先把整套東西想成一間小公司</h2><p>每個工具都有不同職責，不要把它們混在一起。</p></div>
+      </div>
+
+      <div class="company-grid">
+        <article class="role-card"><div class="icon">🧠</div><h3>Model</h3><p>大腦。決定理解、推理與寫程式的能力。</p><small>Claude Opus / Sonnet / Haiku；Codex 可選模型與推理程度。</small></article>
+        <article class="role-card"><div class="icon">👨‍💻</div><h3>Codex / Claude Code</h3><p>AI 工程師＋工作台。會讀檔、改程式、執行工具。</p></article>
+        <article class="role-card"><div class="icon">📋</div><h3>Notion</h3><p>企劃室與 Wiki。記錄需求、決策、旅遊規劃與待辦。</p></article>
+        <article class="role-card"><div class="icon">🕘</div><h3>Git</h3><p>時光機。每次修改都有存檔點，可以比較與回復。</p></article>
+        <article class="role-card"><div class="icon">🏢</div><h3>GitHub</h3><p>程式碼總部。放 Repo、Issue、Branch、Pull Request。</p></article>
+        <article class="role-card"><div class="icon">🗄️</div><h3>SQLite</h3><p>網站的記憶。把行程、飯店、景點變成結構化資料。</p></article>
+        <article class="role-card"><div class="icon">🔌</div><h3>Connector</h3><p>幫 AI 開門。在授權範圍內讀 Gmail、Drive、Notion 等資料。</p></article>
+        <article class="role-card"><div class="icon">📜</div><h3>Project Rules</h3><p>AI 員工手冊。Codex 看 <code>AGENTS.md</code>；Claude Code 常用 <code>CLAUDE.md</code>。</p></article>
+      </div>
+    </section>
+
+    <section id="ai" class="section contrast">
+      <div class="section-head">
+        <span>02</span>
+        <div><h2>Model、Agent、Mode 到底差在哪？</h2><p>這是新手最容易混在一起的四個層次。</p></div>
+      </div>
+
+      <div class="layer-stack">
+        <div class="layer"><b>1. Model = 大腦</b><span>「誰在想？」</span><p>模型版本會變，不用死背型號。先理解：更強的模型通常適合複雜架構與除錯；更快的模型適合日常小修改。</p></div>
+        <div class="layer"><b>2. Agent = 工程師</b><span>「誰在做？」</span><p>Codex / Claude Code 不只是聊天介面，它們能讀 Repo、執行命令、修改檔案、測試與使用工具。</p></div>
+        <div class="layer"><b>3. Mode = 工作方式</b><span>「現在先想，還是直接做？」</span><p>Plan 類模式先調查與提出方案；執行類模式才真的修改程式。權限模式則決定每一步要不要先問你。</p></div>
+        <div class="layer"><b>4. Rules = 公司規章</b><span>「做事要遵守什麼？」</span><p><code>AGENTS.md</code> / <code>CLAUDE.md</code> 放長期規則，例如語言、資料夾、測試方式與不能亂動的區域。</p></div>
+      </div>
+
+      <div class="compare-grid">
+        <article class="panel">
+          <div class="tag">Claude Code</div>
+          <h3>Plan Mode = 先勘查，不施工</h3>
+          <p>Plan Mode 會讀檔、探索程式碼、提出方案，但在你批准前不改原始碼。很適合需求還沒完全想清楚，或改動範圍大的任務。</p>
+          <ul>
+            <li><strong>Sonnet：</strong>日常 coding 的平衡選擇。</li>
+            <li><strong>Opus：</strong>複雜推理、架構與難題。</li>
+            <li><strong>Haiku：</strong>較簡單、速度優先的工作。</li>
+            <li><strong>opusplan：</strong>目前可讓 Plan 階段使用 Opus、執行階段切到 Sonnet。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="tag">Codex</div>
+          <h3>Plan / Default = 規劃與執行分開</h3>
+          <p>Codex 的 Plan collaboration mode 以非破壞性探索與完整計畫為主；切回 Default 後才執行修改。你也能選模型與 reasoning effort。</p>
+          <ul>
+            <li><strong>較低 reasoning：</strong>快，適合明確的小修改。</li>
+            <li><strong>較高 reasoning：</strong>慢一些，但更適合跨檔、架構、難除錯。</li>
+            <li><strong>不要迷信最高：</strong>任務簡單時，高推理只會增加等待與成本。</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="analogy">
+        <div><b>超簡單比喻</b></div>
+        <p><strong>Model</strong> 是工程師的腦袋；<strong>Codex / Claude Code</strong> 是你聘請的工程師；<strong>Plan Mode</strong> 是「先畫施工圖」；<strong>Default / Execute</strong> 是「開始施工」；<strong>AGENTS.md / CLAUDE.md</strong> 是公司 SOP。</p>
+      </div>
+    </section>
+
+    <section id="workflow" class="section">
+      <div class="section-head">
+        <span>03</span>
+        <div><h2>一次真正的小型開發流程</h2><p>以「新增布拉格旅行頁」為例。</p></div>
+      </div>
+
+      <div class="flow" aria-label="開發流程">
+        <div class="flow-item"><b>Notion</b><span>寫需求</span></div><i>→</i>
+        <div class="flow-item"><b>GitHub Issue</b><span>變成工作單</span></div><i>→</i>
+        <div class="flow-item accent"><b>Plan Mode</b><span>先分析怎麼做</span></div><i>→</i>
+        <div class="flow-item"><b>Branch</b><span>開施工區</span></div><i>→</i>
+        <div class="flow-item accent"><b>Codex / Claude</b><span>實作</span></div><i>→</i>
+        <div class="flow-item"><b>Test</b><span>驗證</span></div><i>→</i>
+        <div class="flow-item"><b>Pull Request</b><span>檢查差異</span></div><i>→</i>
+        <div class="flow-item"><b>Merge</b><span>進 main</span></div><i>→</i>
+        <div class="flow-item success"><b>Deploy</b><span>網站更新</span></div>
+      </div>
+
+      <div class="two-col">
+        <article class="panel">
+          <h3>先給 Plan Mode</h3>
+          <pre><code>我要新增 Prague 行程。
+先不要修改任何檔案。
+
+請先：
+1. 看目前專案結構
+2. 找出應該修改哪些檔案
+3. 說明資料要放哪裡
+4. 說明可能影響哪些既有功能
+5. 提出實作計畫</code></pre>
+        </article>
+        <article class="panel">
+          <h3>確認後再執行</h3>
+          <pre><code>依照剛才的計畫實作。
+
+限制：
+- 保留現有 Tokyo 行程
+- UI 使用繁體中文
+- 手機版不能壞
+- 完成後自行測試
+- 最後摘要修改了哪些檔案</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section id="stack" class="section contrast">
+      <div class="section-head">
+        <span>04</span>
+        <div><h2>每個工具到底負責什麼？</h2><p>用最少的概念，把真正的開發世界串起來。</p></div>
+      </div>
+
+      <div class="tool-list">
+        <article><div class="tool-no">A</div><div><h3>Git + GitHub：時光機 + 雲端總部</h3><p>Git 負責版本；GitHub 放 Repo、Issue、Branch、PR。兩者不是同一個東西。</p><div class="mini">Git = 存檔系統　／　GitHub = 放存檔與協作的地方</div></div></article>
+        <article><div class="tool-no">B</div><div><h3>GitHub Pages：把靜態網站公開</h3><p>HTML / CSS / JavaScript 可以直接發布成公開網站。很適合第一個作品集，但它不會替你執行 Python、Node.js 或 SQLite 後端。</p></div></article>
+        <article><div class="tool-no">C</div><div><h3>Notion：人看的文件</h3><p>放需求、企劃、決策、旅遊規劃、TODO。它回答「為什麼做、想做什麼」。</p></div></article>
+        <article><div class="tool-no">D</div><div><h3>README.md：Repo 的門面</h3><p>告訴來到 GitHub 的人「這是什麼、怎麼執行、有哪些功能」。作品集一定要有。</p></div></article>
+        <article><div class="tool-no">E</div><div><h3>AGENTS.md / CLAUDE.md：AI 的長期規則</h3><p>不要每次重講「用繁中、不要改某資料夾、改完要測試」。把固定規則寫進專案。</p></div></article>
+        <article><div class="tool-no">F</div><div><h3>Issue → Branch → Pull Request：正式的修改流程</h3><p>Issue 是工單；Branch 是平行施工區；Pull Request 是「我改好了，請檢查後合併」。</p></div></article>
+        <article><div class="tool-no">G</div><div><h3>Test：AI 說 Done 不代表真的 Done</h3><p>至少檢查桌機、手機、舊功能、連結與部署。之後再學自動化測試。</p></div></article>
+        <article><div class="tool-no">H</div><div><h3>.env / Secret：鑰匙不要貼在 GitHub 上</h3><p>API Key、密碼、Token 不要 commit。公開 Repo 特別要養成這個習慣。</p></div></article>
+        <article><div class="tool-no">I</div><div><h3>SQLite：Database 新手村</h3><p>它可以把資料庫裝在一個檔案裡，很適合從「資料寫死在 HTML」進化到「程式讀資料」。</p></div></article>
+        <article><div class="tool-no">J</div><div><h3>API：前台與資料之間的服務窗口</h3><p>Frontend 不必直接碰 Database；它向 API 要資料，API 再處理資料庫與商業邏輯。</p></div></article>
+        <article><div class="tool-no">K</div><div><h3>Connector / MCP：AI 與外部世界的橋</h3><p>讓 AI 在你授權的範圍內使用 Gmail、Drive、Notion、GitHub、Database 等外部資料與工具，不用每次手動複製貼上。</p></div></article>
+        <article><div class="tool-no">L</div><div><h3>Deploy + Log：上線與出事後找證據</h3><p>Local 能跑不代表 Internet 能跑。Deploy 是把成品上線；Log 像飛機黑盒子，出錯時靠它查原因。</p></div></article>
+      </div>
+    </section>
+
+    <section class="section" id="docs">
+      <div class="section-head">
+        <span>05</span>
+        <div><h2>Notion、README、Rules 要怎麼分？</h2><p>三種文件看起來都像 Markdown，但讀者不一樣。</p></div>
+      </div>
+      <div class="doc-grid">
+        <article><h3>Notion</h3><strong>給「人」看</strong><p>需求、背景、決策、旅遊內容、Roadmap。</p><code>我們為什麼要做這個功能？</code></article>
+        <article><h3>README.md</h3><strong>給「Repo 的訪客」看</strong><p>專案介紹、功能、啟動方式、Demo。</p><code>這個專案是什麼？怎麼用？</code></article>
+        <article><h3>AGENTS.md / CLAUDE.md</h3><strong>給「AI 工程師」看</strong><p>專案規則、架構慣例、測試方法、禁區。</p><code>你改這個專案時要怎麼做？</code></article>
+      </div>
+    </section>
+
+    <section class="section" id="python">
+      <div class="section-head">
+        <span>06</span>
+        <div><h2>Python：不用背語法，先學會看懂</h2><p>AI 可以負責寫大部分程式；你至少要能判斷它正在處理什麼資料、做什麼判斷，以及錯在哪裡。</p></div>
+      </div>
+
+      <div class="python-intro">
+        <div class="python-message">
+          <b>AI 時代的 Python 目標</b>
+          <p>不是考你能不能從空白頁手寫程式，而是看到 Codex / Claude 產生的 Python 時，能大概讀懂、能問對問題、能看懂錯誤。</p>
+        </div>
+        <div class="python-role">
+          <span>HTML = 內容</span>
+          <span>CSS = 長相</span>
+          <span>JavaScript = 瀏覽器互動</span>
+          <span class="active">Python = 資料 / 自動化 / Backend 常見工具</span>
+        </div>
+      </div>
+
+      <div class="concept-grid">
+        <article><b>變數</b><code>city = "Tokyo"</code><p>替一個值取名字。</p></article>
+        <article><b>List</b><code>["Tokyo", "Prague"]</code><p>一串資料。</p></article>
+        <article><b>Dictionary</b><code>{"city": "Tokyo"}</code><p>有欄位名稱的一筆資料。</p></article>
+        <article><b>if</b><code>if days &gt; 5:</code><p>符合條件才做事。</p></article>
+        <article><b>for</b><code>for trip in trips:</code><p>把一串資料逐筆處理。</p></article>
+        <article><b>function</b><code>def total(...):</code><p>把一段工作包起來重複使用。</p></article>
+        <article><b>import</b><code>import json</code><p>使用現成工具或套件。</p></article>
+        <article><b>Error / Traceback</b><code>KeyError: 'city'</code><p>程式留下的錯誤線索，不用靠猜。</p></article>
+      </div>
+
+      <div class="two-col python-example">
+        <article class="panel">
+          <h3>你只要能讀懂這種程度</h3>
+          <pre><code>trips = [
+    {"city": "Tokyo", "days": 5},
+    {"city": "Prague", "days": 7}
+]
+
+for trip in trips:
+    if trip["days"] &gt; 5:
+        print(trip["city"])</code></pre>
+        </article>
+        <article class="panel explanation">
+          <h3>不用背，能翻成白話就夠</h3>
+          <ol>
+            <li><code>trips</code> 是一串旅行資料。</li>
+            <li><code>for</code> 把每趟旅行一個一個拿出來。</li>
+            <li><code>if</code> 判斷旅行是否超過 5 天。</li>
+            <li>符合條件就印出城市名稱。</li>
+          </ol>
+          <div class="mini">看到不懂的語法 → 先叫 AI 解釋，不要急著叫它重寫整份。</div>
+        </article>
+      </div>
+
+      <div class="callout python-debug">
+        <strong>比背語法更重要：</strong>遇到錯誤時，把「預期結果、實際結果、完整 Error / Traceback」交給 AI，先要求它解釋 root cause，再修改程式。
+      </div>
+    </section>
+
+    <section class="section contrast" id="data">
+      <div class="section-head">
+        <span>07</span>
+        <div><h2>從靜態頁面進化到真正的 Web App</h2><p>先不要一次全學；讓需求自然逼出下一個概念。</p></div>
+      </div>
+      <div class="evolution">
+        <div><b>現在</b><span>HTML / CSS / JS</span><small>行程直接寫在頁面</small></div><i>→</i>
+        <div><b>先會看懂</b><span>Python</span><small>理解資料與程式流程</small></div><i>→</i>
+        <div><b>下一步</b><span>SQLite</span><small>行程變成資料</small></div><i>→</i>
+        <div><b>再下一步</b><span>Backend + API</span><small>程式幫前台取資料</small></div><i>→</i>
+        <div><b>之後</b><span>Cloud Deploy</span><small>真正的動態 Web App</small></div>
+      </div>
+      <div class="two-col">
+        <article class="panel"><h3>寫死在 HTML</h3><pre><code>&lt;h2&gt;Tokyo&lt;/h2&gt;
+&lt;p&gt;2026-11-05&lt;/p&gt;</code></pre><p>兩趟旅行很簡單；五十趟開始痛苦。</p></article>
+        <article class="panel"><h3>放進 SQLite</h3><pre><code>trips
+--------------------------
+id | city   | start_date
+1  | Tokyo  | 2026-11-05
+2  | Prague | 2027-03-20</code></pre><p>畫面和資料分開，才容易新增、搜尋與維護。</p></article>
+      </div>
+    </section>
+
+    <section class="section contrast" id="connector">
+      <div class="section-head">
+        <span>08</span>
+        <div><h2>Connector：讓 AI 不只看得到聊天視窗</h2><p>AI 本身很聰明，但如果沒有連接外部服務，它不知道你的信箱、雲端文件或工作系統裡有什麼。</p></div>
+      </div>
+
+      <div class="connector-analogy">
+        <div class="closed-room">
+          <div class="connector-icon">🤖</div>
+          <b>沒有 Connector</b>
+          <p>AI 像待在房間裡的工程師，只能看你貼進來的文字與目前專案檔案。</p>
+        </div>
+        <div class="bridge">授權的橋樑 →</div>
+        <div class="service-cloud">
+          <span>✉️ Gmail</span>
+          <span>📁 Google Drive</span>
+          <span>📚 Notion</span>
+          <span>🐙 GitHub</span>
+          <span>🗄️ Database</span>
+        </div>
+      </div>
+
+      <div class="compare-grid connector-cards">
+        <article class="panel">
+          <div class="tag">產品裡常看到</div>
+          <h3>Connector / App = 現成的門</h3>
+          <p>例如把 Google Drive、Gmail 或 Notion 接到 AI。登入並授權後，AI 才能依照允許的權限搜尋、讀取，某些整合也能執行支援的動作。</p>
+          <div class="mini">重點：不是「AI 自動知道全部資料」，而是你先連線 + 授權。</div>
+        </article>
+        <article class="panel">
+          <div class="tag">Claude Code 常見</div>
+          <h3>MCP = 通用的插座規格</h3>
+          <p>Model Context Protocol 可以把 AI 接到外部工具、API、Database。你可以把 MCP 想成「USB-C 規格」：服務只要提供相容介面，AI 就知道怎麼使用它提供的工具。</p>
+          <div class="mini">Connector 是「一扇門」；MCP 是「大家可以遵循的門鎖規格」。</div>
+        </article>
+      </div>
+
+      <div class="connector-flow">
+        <div><b>你下需求</b><span>「整理下一趟旅行」</span></div><i>→</i>
+        <div class="accent-box"><b>Codex / Claude / ChatGPT</b><span>判斷需要哪些資料</span></div><i>→</i>
+        <div><b>Connector / MCP</b><span>依權限呼叫工具</span></div><i>→</i>
+        <div><b>Gmail / Drive / Notion</b><span>回傳需要的內容</span></div><i>→</i>
+        <div class="success-box"><b>完成任務</b><span>整理、比較、更新或產生程式</span></div>
+      </div>
+
+      <div class="two-col connector-example">
+        <article class="panel">
+          <h3>沒有 Connector</h3>
+          <pre><code>你：我把機票 Email 貼給你。
+你：這是住宿 PDF。
+你：這是 Notion 行程。
+
+AI：好，我來整理。</code></pre>
+          <p>資料要自己找、自己複製、自己貼。</p>
+        </article>
+        <article class="panel">
+          <h3>有 Connector</h3>
+          <pre><code>幫我找 Gmail 的機票確認信，
+再看 Drive 的住宿資料與 Notion 行程，
+整理出缺少預約的日期。</code></pre>
+          <p>AI 可以直接向已授權的服務取得工作需要的資訊。</p>
+        </article>
+      </div>
+
+      <div class="permission-strip">
+        <div><b>🔐 Authentication</b><span>你是誰？先登入。</span></div>
+        <div><b>🎟️ Permission</b><span>可以讀什麼、改什麼？</span></div>
+        <div><b>🎯 Scope</b><span>只給完成任務需要的範圍。</span></div>
+        <div><b>✅ Confirmation</b><span>寄信、刪檔等動作要特別小心。</span></div>
+      </div>
+
+      <div class="callout">
+        <strong>最重要的安全觀念：</strong>Connector 不是把整個帳號「交給 AI」。AI 能做什麼取決於帳號本身的存取權、你授予的權限、工作區設定，以及該整合實際提供哪些操作。外部內容也可能包含惡意指令，所以高風險寫入動作不要無腦放行。
+      </div>
+    </section>
+
+    <section id="lesson" class="section">
+      <div class="section-head">
+        <span>09</span>
+        <div><h2>最適合新手的教學順序</h2><p>不要從背語法開始。每一步都讓現有旅遊網站多一個「真的有用」的能力。</p></div>
+      </div>
+
+      <ol class="roadmap">
+        <li><div class="step">1</div><div><h3>把現有旅遊網站放進 GitHub</h3><p>建立 Repo、README，理解 Git 與 GitHub 的差異。</p><span class="goal">成果：GitHub 上有第一個作品</span></div></li>
+        <li><div class="step">2</div><div><h3>用 GitHub Pages 公開</h3><p>讓朋友用手機真的開得到。理解 Local → GitHub → Deploy → Internet。</p><span class="goal">成果：一條公開網址</span></div></li>
+        <li><div class="step">3</div><div><h3>建立 Notion 專案頁</h3><p>寫需求、TODO、旅行規劃，再把一個需求變成 GitHub Issue。</p><span class="goal">成果：第一次有「需求 → 工單」</span></div></li>
+        <li><div class="step">4</div><div><h3>加入 AGENTS.md / CLAUDE.md</h3><p>把 UI 語言、風格、禁區、測試規則交給 AI。</p><span class="goal">成果：不用每次重講 SOP</span></div></li>
+        <li><div class="step">5</div><div><h3>用 Plan Mode 做一次功能</h3><p>先分析、再批准、再實作。學會把「想」跟「做」拆開。</p><span class="goal">成果：第一次有設計過的 AI 開發</span></div></li>
+        <li><div class="step">6</div><div><h3>Branch → Test → Pull Request</h3><p>不要直接在正式版本施工。看 diff、驗證，再 merge。</p><span class="goal">成果：接近公司的 Git 工作流</span></div></li>
+        <li><div class="step">7</div><div><h3>10 分鐘讀懂 Python</h3><p>只學變數、List / Dictionary、if、for、function、import 與 Traceback 的概念；不用背語法。</p><span class="goal">成果：AI 寫 Python 時你看得懂大意</span></div></li>
+        <li><div class="step">8</div><div><h3>先理解 Connector / MCP</h3><p>不用先會串 API，只要理解「AI 如何在授權下連到 Gmail、Drive、Notion、GitHub 或其他工具」，並知道讀取與寫入權限不同。</p><span class="goal">成果：知道 AI 如何跨系統工作</span></div></li>
+        <li><div class="step">9</div><div><h3>SQLite → API → Backend</h3><p>等靜態網站真的遇到資料管理需求，再學 Database 與 Backend；不用一開始就把所有技術塞進來。</p><span class="goal">成果：從網站走向 Web App</span></div></li>
+      </ol>
+    </section>
+
+    <section class="section finish">
+      <h2>最後要學的不是「怎麼叫 AI 寫 Code」</h2>
+      <p>而是能清楚告訴 AI：<strong>這是需求、這是現況、這是限制、這是規則；先分析方案，確認後實作，完成後驗證。</strong></p>
+      <div class="maturity">
+        <span>「幫我做一個網頁」</span><i>→</i>
+        <span>「先分析這個問題」</span><i>→</i>
+        <span class="strong">「這是需求與限制，先做 decision-complete plan，再實作與驗證。」</span>
+      </div>
+    </section>
+
+    <section class="section sources">
+      <h2>官方延伸閱讀</h2>
+      <p>模型與產品更新很快，所以這裡只教不容易過時的概念；需要最新細節時看官方文件。</p>
+      <div class="source-links">
+        <a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noreferrer">Claude Code Permission / Plan Modes ↗</a>
+        <a href="https://code.claude.com/docs/en/model-config" target="_blank" rel="noreferrer">Claude Code Model Configuration ↗</a>
+        <a href="https://github.com/openai/codex/blob/main/codex-rs/collaboration-mode-templates/templates/plan.md" target="_blank" rel="noreferrer">Codex Plan Mode source ↗</a>
+        <a href="https://developers.openai.com/api/docs/models/gpt-5.3-codex" target="_blank" rel="noreferrer">Codex model / reasoning reference ↗</a>
+        <a href="https://help.openai.com/zh-hant/articles/11487775-connectors-in-chatgpt" target="_blank" rel="noreferrer">ChatGPT Apps / Connectors ↗</a>
+        <a href="https://code.claude.com/docs/zh-TW/mcp" target="_blank" rel="noreferrer">Claude Code MCP ↗</a>
+      </div>
+      <p class="updated">內容原則檢查：2026-08-30</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Codex / Claude 工程入門指南</span>
+    <span>用旅行網站學真正的開發流程</span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
