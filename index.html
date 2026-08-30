@@ -33,7 +33,6 @@
         <a href="#roadmap">學習順序</a>
       </nav>
       <div class="sidebar-links">
-        <a href="./google-workspace-lab.html">Gmail + Drive Lab →</a>
         <a href="https://github.com/k1everwann/codex-starter-guide" target="_blank" rel="noreferrer">Repository ↗</a>
         <a href="https://k1everwann.github.io/codex-starter-guide/" target="_blank" rel="noreferrer">Live site ↗</a>
       </div>
@@ -46,7 +45,7 @@
         <p class="intro-text">給已經開始用 AI 寫程式的人。這裡不要求你先背大量語法，而是先理解一個真正專案有哪些部分，以及需求、AI、程式碼、資料、權限、版本與部署怎麼串在一起。</p>
         <div class="intro-links">
           <a href="#repo">先看專案架構 →</a>
-          <a href="./google-workspace-lab.html">直接做 Gmail + Drive Lab →</a>
+          <a href="#lab">直接做 Gmail + Drive Lab →</a>
         </div>
         <div class="note">
           <strong>這個網站本身就是教材。</strong>
@@ -120,9 +119,10 @@ Rules   = 公司 SOP</pre>
 
         <pre class="tree"><code>codex-starter-guide/
 ├─ index.html                    主教學網站
-├─ google-workspace-lab.html     Hands-on Lab 網頁
+├─ lab-content.html              主頁內載入的完整 Hands-on Lab
+├─ google-workspace-lab.html     舊網址相容轉址
 ├─ styles.css                    排版與視覺
-├─ script.js                     少量互動
+├─ script.js                     載入 Lab 與導覽互動
 ├─ README.md                     Repo 首頁
 ├─ PROJECT-ARCHITECTURE.md       專案架構導讀
 ├─ AGENTS.md                     Codex 專案規則
@@ -434,38 +434,11 @@ Merge → Deploy</pre>
       <section id="lab">
         <div class="section-label">09</div>
         <h2>Hands-on：真的做一個 Gmail + Google Drive 網站</h2>
-        <p class="section-lead">這一章不只講 Connector。你會真的建立 GCP Project、啟用 API、設定 OAuth，再把 Gmail / Drive 放進自己的 Web App。</p>
-
-        <pre class="diagram">建立 Standard GCP Project
-        ↓
-Enable Gmail API + Drive API
-        ↓
-Google Auth / OAuth
-        ↓
-Apps Script 綁 Project Number
-        ↓
-Code.gs Backend + Index.html Frontend
-        ↓
-GmailApp / DriveApp
-        ↓
-Deploy Web App
-        ↓
-Travel Workspace Dashboard</pre>
-
-        <table>
-          <thead><tr><th>你會做</th><th>你會理解</th></tr></thead>
-          <tbody>
-            <tr><td>建立 GCP Project</td><td>Project ID / Project Number / Cloud 設定</td></tr>
-            <tr><td>Enable Gmail / Drive API</td><td>API 為什麼需要由 Project 明確啟用</td></tr>
-            <tr><td>Google Auth Platform</td><td>Branding、Audience、Test users、Scopes</td></tr>
-            <tr><td>Apps Script</td><td>Frontend / Backend 分工與權限</td></tr>
-            <tr><td>Deploy</td><td>誰能開網站 vs Backend 用誰的帳號執行</td></tr>
-            <tr><td>Debug</td><td>Browser → Apps Script → GCP / OAuth 分層排查</td></tr>
-          </tbody>
-        </table>
-
-        <p><a href="./google-workspace-lab.html"><strong>開始 Google Workspace Hands-on Lab →</strong></a></p>
-        <p><a href="https://github.com/k1everwann/codex-starter-guide/tree/main/labs/google-workspace-webapp" target="_blank" rel="noreferrer">查看 Lab 的完整 Code 與 README ↗</a></p>
+        <p class="section-lead">這一章不只講 Connector。接下來直接照 09.1 → 09.10 往下做：建立 GCP Project、啟用 API、設定 OAuth、串 Apps Script，最後完成自己的 Gmail + Drive Web App。</p>
+        <div class="note">
+          <strong>完成標準</strong>
+          <span>你能打開自己的 Web App，載入旅遊相關 Gmail，並用關鍵字搜尋自己的 Google Drive 檔案。這裡就是完整 Lab，不需要再跳到另一個教學頁。</span>
+        </div>
       </section>
 
       <section id="roadmap">
