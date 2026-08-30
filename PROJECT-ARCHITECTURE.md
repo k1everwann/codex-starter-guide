@@ -1,6 +1,6 @@
 # 專案架構導讀
 
-這份文件的目的不是教你背名詞，而是直接用這個 Repo 理解：**一個最小但完整的 Web 專案，到底有哪些東西。**
+這份文件直接用這個 Repo 理解：**一個最小但完整的 Web 專案，到底有哪些東西。**
 
 公開網站：<https://k1everwann.github.io/codex-starter-guide/>
 
@@ -12,9 +12,9 @@ Repo：<https://github.com/k1everwann/codex-starter-guide>
 
 ```text
 codex-starter-guide/
-├─ index.html          ← 網站內容與骨架
+├─ index.html          ← 網站內容與結構
 ├─ styles.css          ← 外觀、排版、RWD
-├─ script.js           ← 網頁互動
+├─ script.js           ← 少量互動
 ├─ README.md           ← 給第一次進 Repo 的人看
 ├─ PROJECT-ARCHITECTURE.md
 │                      ← 你正在看的專案導讀
@@ -63,9 +63,7 @@ Pages       = 把 main 的靜態網站發布到 Internet
 https://k1everwann.github.io/codex-starter-guide/
 ```
 
-所以 GitHub Pages 不是另一份網站。
-
-它發布的來源就是這個 Repo 裡的靜態檔案。
+GitHub Pages 不是另一份網站；它發布的來源就是這個 Repo 裡的靜態檔案。
 
 ---
 
@@ -76,43 +74,40 @@ https://k1everwann.github.io/codex-starter-guide/
 打開：
 <https://github.com/k1everwann/codex-starter-guide/blob/main/index.html>
 
-你不用看懂所有 HTML。
-
-先找網站上真的看得到的一句文字，例如章節標題。你會發現：**瀏覽器顯示的內容，本來就存在程式碼裡。**
+不用看懂所有 HTML。先找網站上真的看得到的一句文字或一個章節標題，你會發現：**瀏覽器顯示的內容，本來就存在程式碼裡。**
 
 ### 第二步：看 `styles.css`
 
 打開：
 <https://github.com/k1everwann/codex-starter-guide/blob/main/styles.css>
 
-搜尋：
+可以搜尋：
 
 ```text
-.hero
-.panel
-.section
+.sidebar
+.content
+section
 ```
 
-你會看到「HTML 只是說這是某個區塊」，真正的間距、圓角、背景、字體大小由 CSS 決定。
+你會看到 HTML 只描述「這是什麼區塊」，真正的寬度、留白、字體大小、邊線與手機版配置由 CSS 決定。
+
+這個版本刻意採用簡約文件站版型：桌機左側目錄、右側窄內容欄，幾乎沒有陰影或大型 Hero。
 
 ### 第三步：看 `script.js`
 
 打開：
 <https://github.com/k1everwann/codex-starter-guide/blob/main/script.js>
 
-JavaScript 負責需要「動起來」或「根據狀況改變」的部分。
-
-這個網站甚至會用 JavaScript 把 Repo 實戰章節插進頁面，所以它本身也是 JavaScript 的實例。
+這個網站的 JavaScript 很少，只負責根據目前閱讀的位置，高亮左側導覽。這也是一個好例子：**不是每個網站都需要很多 JavaScript。**
 
 ---
 
 ## 4. README、AGENTS.md、CLAUDE.md 為什麼都要存在？
 
-它們看起來都只是文字檔，但讀者不同。
-
 | 檔案 | 主要讀者 | 回答的問題 |
 |---|---|---|
 | `README.md` | 人 | 這是什麼專案？怎麼看？ |
+| `PROJECT-ARCHITECTURE.md` | 開發者 | 這個專案有哪些部分？ |
 | `AGENTS.md` | Codex | 修改這個專案要遵守什麼規則？ |
 | `CLAUDE.md` | Claude Code | Claude 在這個專案裡怎麼工作？ |
 
@@ -120,10 +115,13 @@ JavaScript 負責需要「動起來」或「根據狀況改變」的部分。
 
 ```text
 README.md
-= 公司官網 / 新人介紹
+= 公司門口的介紹
+
+PROJECT-ARCHITECTURE.md
+= 建築平面圖
 
 AGENTS.md / CLAUDE.md
-= 員工內部 SOP
+= 內部 SOP
 ```
 
 ---
@@ -140,13 +138,9 @@ AGENTS.md / CLAUDE.md
 紅色 -  = 這次刪除
 ```
 
-這就是 `diff`。
+這就是 `diff`。工程師真正關心的通常不是整份檔案，而是：**這次修改到底改了什麼？**
 
-工程師真正關心的通常不是「現在整份檔案長什麼樣」，而是：
-
-> **這次修改到底改了什麼？**
-
-所以 Codex / Claude 改完後，養成看 diff 的習慣比背 Git 指令更重要。
+所以 Codex / Claude 改完後，養成看 diff 的習慣，比先背大量 Git 指令重要。
 
 ---
 
@@ -166,8 +160,6 @@ Merge
 = 確認沒問題後放進 main
 ```
 
-對新手來說，先理解這張圖即可：
-
 ```text
 main ───────────────────────●───
        \
@@ -184,8 +176,6 @@ main ───────────────────────●─
 
 ## 7. 可以直接拿這個 Repo 問 AI
 
-### 用 Plan Mode 練習
-
 ```text
 請先不要修改程式。
 
@@ -200,13 +190,11 @@ https://github.com/k1everwann/codex-starter-guide
 5. 如果我要新增一個章節，你預計修改哪些檔案？
 ```
 
-這個練習的重點不是答案，而是學會先讓 AI **讀現況 → 分析 → 規劃**，不要一開始就亂改。
+重點是練習：**讀現況 → 分析 → 規劃 → 再執行。**
 
 ---
 
-## 8. 之後你自己的旅遊網站也可以長這樣
-
-一開始不需要很複雜：
+## 8. 之後自己的旅遊網站也可以長這樣
 
 ```text
 my-travel-site/
