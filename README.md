@@ -2,22 +2,56 @@
 
 這不是單純的一個教學網站。**這個 GitHub Repo 本身就是教材。**
 
-你可以同時看兩邊：
+你可以同時看三個入口：
 
-- 🌐 公開教學網站：<https://k1everwann.github.io/codex-starter-guide/>
+- 🌐 主教學網站：<https://k1everwann.github.io/codex-starter-guide/>
+- 🧪 Gmail + Drive Hands-on Lab：<https://k1everwann.github.io/codex-starter-guide/google-workspace-lab.html>
 - 🐙 GitHub Repo：<https://github.com/k1everwann/codex-starter-guide>
 
-網站教你「概念」，Repo 讓你看到「真正的專案長什麼樣」。
+主網站教「概念」，Repo 讓你看「真正的專案長什麼樣」，Hands-on Lab 則讓你真的做出一個會讀 Gmail / Google Drive 的 Web App。
 
 ## 建議怎麼學
 
-1. 先開教學網站，看 Git / GitHub / AI Coding 的比喻。
+1. 先開主教學網站，理解 Model / Agent / Mode、Git / GitHub、README / Rules、Python、Data / API、Connector。
 2. 回到這個 Repo，打開 `index.html`、`styles.css`、`script.js`，對照網站畫面。
-3. 看 `README.md`、`AGENTS.md`、`CLAUDE.md`，理解「給人看的文件」和「給 AI 的規則」差在哪。
-4. 打開 Commits，看每次修改的 diff，理解 Git 真正在保存的是什麼。
-5. 再把自己的旅遊網站照同樣方式整理成一個 Repo。
+3. 看 Commits，理解 Git 真正在保存的是什麼。
+4. 做 [Google Workspace Hands-on Lab](./labs/google-workspace-webapp/README.md)：從 GCP Project、API、OAuth 到 Apps Script Web App。
+5. 再把自己的旅遊網站照同樣方式整理、擴充。
 
 👉 更完整的專案導讀請看：[PROJECT-ARCHITECTURE.md](./PROJECT-ARCHITECTURE.md)
+
+---
+
+## Hands-on：真的做一個 Gmail + Google Drive 網站
+
+這個 Lab 不是只看 code，而是一步一步完成：
+
+```text
+建立 Standard GCP Project
+        ↓
+Enable Gmail API + Drive API
+        ↓
+Google Auth / OAuth
+        ↓
+Apps Script 綁 Project Number
+        ↓
+Frontend + Backend
+        ↓
+GmailApp / DriveApp
+        ↓
+Deploy Web App
+        ↓
+自己的 Travel Workspace Dashboard
+```
+
+完整教學：
+
+- 網頁版：<https://k1everwann.github.io/codex-starter-guide/google-workspace-lab.html>
+- Repo 版：[labs/google-workspace-webapp/README.md](./labs/google-workspace-webapp/README.md)
+- Backend：[Code.gs](./labs/google-workspace-webapp/Code.gs)
+- Frontend：[Index.html](./labs/google-workspace-webapp/Index.html)
+
+做完後會碰到：Frontend、Backend、GCP Project、API enablement、OAuth、Permission、Gmail、Drive、Error handling、Deploy。
 
 ---
 
@@ -25,17 +59,22 @@
 
 ```text
 codex-starter-guide/
-├─ index.html          ← 網站內容與骨架
-├─ styles.css          ← 外觀、排版、RWD
-├─ script.js           ← 網頁互動
-├─ README.md           ← Repo 的入口
-├─ PROJECT-ARCHITECTURE.md
-│                      ← 專案架構導讀
-├─ AGENTS.md           ← Codex 的專案規則
-├─ CLAUDE.md           ← Claude Code 的專案規則
-├─ .gitignore          ← 不要進 Git 的檔案
-├─ .env.example        ← Secret / 環境變數範例
-└─ .nojekyll           ← GitHub Pages 靜態站設定
+├─ index.html                    ← 主教學網站
+├─ google-workspace-lab.html     ← 完整實作 Lab
+├─ styles.css                    ← 外觀、排版、RWD
+├─ script.js                     ← 網頁互動
+├─ README.md                     ← Repo 的入口
+├─ PROJECT-ARCHITECTURE.md       ← 專案架構導讀
+├─ AGENTS.md                     ← Codex 的專案規則
+├─ CLAUDE.md                     ← Claude Code 的專案規則
+├─ labs/
+│  └─ google-workspace-webapp/
+│     ├─ README.md               ← GCP → Gmail / Drive 完整步驟
+│     ├─ Code.gs                 ← Apps Script Backend
+│     └─ Index.html              ← Apps Script Frontend
+├─ .gitignore                    ← 不要進 Git 的檔案
+├─ .env.example                  ← Secret / 環境變數範例
+└─ .nojekyll                     ← GitHub Pages 靜態站設定
 ```
 
 最先記住：
@@ -50,6 +89,7 @@ CLAUDE      = 給 Claude Code 的 SOP
 Git         = 保存版本
 GitHub      = 放 Repo 與協作
 Pages       = 把 main 發布成網站
+GCP Project = API / OAuth / Cloud 設定所在的位置
 ```
 
 ---
@@ -66,6 +106,7 @@ Pages       = 把 main 發布成網站
 - Python：只學到看得懂 AI 寫的程式
 - SQLite、API 的概念
 - Gmail / Google Drive / Notion Connector 與 MCP
+- GCP Project、Google Workspace API、OAuth 的實作流程
 
 ## Python 為什麼只教概念？
 
