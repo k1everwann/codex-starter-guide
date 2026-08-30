@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel Workspace Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 0 auto; padding: 32px 20px; color: #202124; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    p { color: #5f6368; }
+    section { border-top: 1px solid #dadce0; padding: 28px 0; }
+    button, input { font: inherit; padding: 10px 12px; }
+    button { cursor: pointer; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    input { flex: 1; min-width: 220px; }
+    .item { padding: 14px 0; border-bottom: 1px solid #eee; }
+    .item strong { display: block; margin-bottom: 4px; }
+    .meta { font-size: 13px; color: #777; }
+    .status { margin-top: 12px; font-size: 14px; }
+    .error { color: #b3261e; }
+    a { color: #0b57d0; }
+  </style>
+</head>
+<body>
+  <h1>Travel Workspace Dashboard</h1>
+  <p>用 Apps Script 把自己的 Gmail 與 Google Drive 資料顯示在一個網頁。</p>
+
+  <section>
+    <h2>Gmail：旅遊相關郵件</h2>
+    <button onclick="loadEmails()">載入最近旅遊郵件</button>
+    <div id="emailStatus" class="status"></div>
+    <div id="emails"></div>
+  </section>
+
+  <section>
+    <h2>Google Drive：搜尋檔案</h2>
+    <div class="row">
+      <input id="keyword" placeholder="例如：booking、hotel、東京">
+      <button onclick="searchDrive()">搜尋 Drive</button>
+    </div>
+    <div id="driveStatus" class="status"></div>
+    <div id="files"></div>
+  </section>
+
+  <script>
+    function loadEmails() {
+      setStatus('emailStatus', '讀取中…');
+      document.getElementById('emails').innerHTML = '';
+
+      google.script.run
+        .withSuccessHandler(renderEmails)
+        .withFailureHandler(error => showError('emailStatus', error))
+        .getTravelEmails();
+    }
+
+    function renderEmails(items) {
+      setStatus('emailStatus', `找到 ${items.length} 筆`);
+      const root = document.getElementById('emails');
+
+      if (!items.length) {
+        root.textContent = '沒有找到符合條件的郵件。可以回 Code.gs 修改 Gmail query。';
+        return;
+      }
+
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+
+        const subject = document.createElement('strong');
+        subject.textContent = item.subject || '(沒有主旨)';
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = `${item.from} · ${formatDate(item.date)}`;
+
+        div.append(subject, meta);
+        root.appendChild(div);
+      });
+    }
+
+    function searchDrive() {
+      const keyword = document.getElementById('keyword').value.trim();
+      if (!keyword) {
+        setStatus('driveStatus', '先輸入要搜尋的檔名關鍵字。');
+        return;
+      }
+
+      setStatus('driveStatus', '搜尋中…');
+      document.getElementById('files').innerHTML = '';
+
+      google.script.run
+        .withSuccessHandler(renderFiles)
+        .withFailureHandler(error => showError('driveStatus', error))
+        .searchDriveFiles(keyword);
+    }
+
+    function renderFiles(items) {
+      setStatus('driveStatus', `找到 ${items.length} 筆`);
+      const root = document.getElementById('files');
+
+      if (!items.length) {
+        root.textContent = '找不到檔名包含這個關鍵字的檔案。';
+        return;
+      }
+
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+
+        const link = document.createElement('a');
+        link.href = item.url;
+        link.target = '_blank';
+        link.rel = 'noreferrer';
+        link.textContent = item.name;
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = `${item.mimeType} · 更新 ${formatDate(item.updated)}`;
+
+        div.append(link, meta);
+        root.appendChild(div);
+      });
+    }
+
+    function formatDate(value) {
+      return new Intl.DateTimeFormat('zh-TW', {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      }).format(new Date(value));
+    }
+
+    function setStatus(id, text) {
+      const el = document.getElementById(id);
+      el.classList.remove('error');
+      el.textContent = text;
+    }
+
+    function showError(id, error) {
+      const el = document.getElementById(id);
+      el.classList.add('error');
+      el.textContent = `發生錯誤：${error.message || error}`;
+    }
+  </script>
+</body>
+</html>
