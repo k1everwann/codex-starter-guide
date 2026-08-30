@@ -1,3 +1,23 @@
+const isWorkspaceLab = location.pathname.endsWith('/google-workspace-lab.html');
+
+if (!isWorkspaceLab) {
+  const sidebarLinks = document.querySelector('.sidebar-links');
+  if (sidebarLinks) {
+    const labLink = document.createElement('a');
+    labLink.href = './google-workspace-lab.html';
+    labLink.textContent = 'Hands-on: Gmail + Drive →';
+    sidebarLinks.prepend(labLink);
+  }
+
+  const intro = document.querySelector('#overview');
+  if (intro) {
+    const labNote = document.createElement('div');
+    labNote.className = 'note quiet';
+    labNote.innerHTML = '<strong>想直接動手？</strong><span><a href="./google-workspace-lab.html">Google Workspace Hands-on Lab →</a>：從 GCP Project、API、OAuth 一路做到自己的 Gmail + Drive Web App。</span>';
+    intro.appendChild(labNote);
+  }
+}
+
 const links = [...document.querySelectorAll('.sidebar nav a')];
 const sections = links
   .map(link => document.querySelector(link.getAttribute('href')))
