@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Codex / Claude 工程入門指南：用一個真的 GitHub 專案理解 AI Coding、Git、Python、資料庫與 Connector。" />
+  <meta name="description" content="Codex / Claude 工程入門指南：用一個真的 GitHub 專案理解 AI Coding、Git、Python、資料庫、Connector 與 Google Workspace。" />
   <title>Codex / Claude 工程入門指南</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -29,9 +29,11 @@
         <a href="#data">Data / API</a>
         <a href="#connector">Connector / MCP</a>
         <a href="#workflow">工作流程</a>
+        <a href="#lab">Hands-on Lab</a>
         <a href="#roadmap">學習順序</a>
       </nav>
       <div class="sidebar-links">
+        <a href="./google-workspace-lab.html">Gmail + Drive Lab →</a>
         <a href="https://github.com/k1everwann/codex-starter-guide" target="_blank" rel="noreferrer">Repository ↗</a>
         <a href="https://k1everwann.github.io/codex-starter-guide/" target="_blank" rel="noreferrer">Live site ↗</a>
       </div>
@@ -41,34 +43,64 @@
       <section class="intro" id="overview">
         <p class="kicker">Codex / Claude</p>
         <h1>工程入門指南</h1>
-        <p class="intro-text">給已經開始用 AI 寫程式的人。這裡不要求你先背大量語法，而是先看懂一個專案有哪些部分、AI 在哪裡工作，以及程式如何從 GitHub 變成真正可以打開的網站。</p>
+        <p class="intro-text">給已經開始用 AI 寫程式的人。這裡不要求你先背大量語法，而是先理解一個真正專案有哪些部分，以及需求、AI、程式碼、資料、權限、版本與部署怎麼串在一起。</p>
         <div class="intro-links">
           <a href="#repo">先看專案架構 →</a>
-          <a href="#roadmap">照順序學 →</a>
+          <a href="./google-workspace-lab.html">直接做 Gmail + Drive Lab →</a>
         </div>
         <div class="note">
           <strong>這個網站本身就是教材。</strong>
           <span>你現在看的頁面，就是由同一個 GitHub Repo 的 <code>index.html</code>、<code>styles.css</code> 和 <code>script.js</code> 組成，再透過 GitHub Pages 發布。</span>
         </div>
+
+        <pre class="diagram">需求 / 文件
+    │
+    ▼
+Codex / Claude
+    │
+    ├── Project Rules
+    │
+    ▼
+Git + GitHub
+    │
+    ├── Data / API / Connector
+    │
+    ▼
+Deploy → 使用者</pre>
       </section>
 
       <section id="ai">
         <div class="section-label">01</div>
-        <h2>AI 模型與模式</h2>
-        <p class="section-lead">先把四個常被混在一起的概念拆開。</p>
+        <h2>AI 模型、Agent 與模式</h2>
+        <p class="section-lead">先把 Model、Agent、Mode、Rules 四個最容易混在一起的概念拆開。</p>
 
         <dl class="definitions">
-          <div><dt>Model</dt><dd><strong>誰在想。</strong> 模型是大腦。較強的模型適合複雜分析；較快的模型適合明確的小修改。</dd></div>
-          <div><dt>Agent</dt><dd><strong>誰在做。</strong> Codex / Claude Code 能讀專案、改檔案、使用工具，而不只是聊天。</dd></div>
-          <div><dt>Mode</dt><dd><strong>現在怎麼工作。</strong> Plan 類模式先調查與規劃；執行類模式才真正改程式。</dd></div>
-          <div><dt>Rules</dt><dd><strong>做事要遵守什麼。</strong> 專案規則可以放在 <code>AGENTS.md</code> 或 <code>CLAUDE.md</code>。</dd></div>
+          <div><dt>Model</dt><dd><strong>誰在想。</strong> 模型是大腦。較強的模型通常適合複雜架構、跨檔分析與難除錯；較快的模型適合明確的小修改。</dd></div>
+          <div><dt>Agent</dt><dd><strong>誰在做。</strong> Codex / Claude Code 能讀 Repo、改檔案、執行工具、測試，而不只是聊天。</dd></div>
+          <div><dt>Mode</dt><dd><strong>現在怎麼工作。</strong> Plan 類模式先調查與規劃；Default / Execute 類模式才真正改程式。</dd></div>
+          <div><dt>Rules</dt><dd><strong>做事要遵守什麼。</strong> 固定規則可以放在 <code>AGENTS.md</code> 或 <code>CLAUDE.md</code>，避免每次重講。</dd></div>
         </dl>
 
+        <h3>Claude：先理解模型取向</h3>
         <table>
-          <thead><tr><th></th><th>適合拿來理解的方式</th></tr></thead>
+          <thead><tr><th>概念</th><th>新手先這樣理解</th></tr></thead>
           <tbody>
-            <tr><td>Claude</td><td>Opus / Sonnet / Haiku 可以先理解成不同能力與速度取向；Plan Mode 是先看清楚再施工。</td></tr>
-            <tr><td>Codex</td><td>可以選模型與推理程度；Plan 先分析，Default / Execute 再進行實作。</td></tr>
+            <tr><td>Sonnet</td><td>日常 coding 的平衡選擇，速度與能力兼顧。</td></tr>
+            <tr><td>Opus</td><td>複雜推理、架構與難題，適合先做較深的分析。</td></tr>
+            <tr><td>Haiku</td><td>較簡單、速度優先的工作。</td></tr>
+            <tr><td>Plan Mode</td><td>先讀檔、探索、提出方案，不先動原始碼。</td></tr>
+            <tr><td>opusplan</td><td>可以理解成：規劃階段用較強推理，執行時再切回較快模型。</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Codex：Plan、Default 與 reasoning</h3>
+        <table>
+          <thead><tr><th>設定</th><th>適合情況</th></tr></thead>
+          <tbody>
+            <tr><td>較低 reasoning</td><td>明確的小修改、速度優先。</td></tr>
+            <tr><td>較高 reasoning</td><td>跨檔、架構、複雜 bug、需要先理解整個專案。</td></tr>
+            <tr><td>Plan</td><td>先做非破壞性探索，產出完整計畫。</td></tr>
+            <tr><td>Default / Execute</td><td>確認方案後才進入實作。</td></tr>
           </tbody>
         </table>
 
@@ -77,30 +109,38 @@ Agent   = 工程師本人
 Plan    = 先看圖、量尺寸
 Execute = 開始施工
 Rules   = 公司 SOP</pre>
+
+        <div class="note quiet"><strong>不要迷信全部開最高。</strong><span>任務很簡單時，高推理只會增加時間與成本。真正要學的是：什麼時候應該先 Plan，什麼時候可以直接做。</span></div>
       </section>
 
       <section id="repo">
         <div class="section-label">02</div>
         <h2>直接拿這個 Repo 學專案架構</h2>
-        <p class="section-lead">打開 <a href="https://github.com/k1everwann/codex-starter-guide" target="_blank" rel="noreferrer">github.com/k1everwann/codex-starter-guide ↗</a>，對照下面的檔案樹。</p>
+        <p class="section-lead">打開 <a href="https://github.com/k1everwann/codex-starter-guide" target="_blank" rel="noreferrer">github.com/k1everwann/codex-starter-guide ↗</a>，一邊看 Repo，一邊對照網站。</p>
 
         <pre class="tree"><code>codex-starter-guide/
-├─ index.html                 網站內容與結構
-├─ styles.css                 排版與視覺
-├─ script.js                  少量網頁互動
-├─ README.md                  Repo 首頁與入口
-├─ PROJECT-ARCHITECTURE.md    專案架構導讀
-├─ AGENTS.md                  Codex 的專案規則
-├─ CLAUDE.md                  Claude Code 的專案規則
-├─ .gitignore                 不要進 Git 的檔案
-├─ .env.example               環境變數範例
-└─ .nojekyll                  GitHub Pages 設定</code></pre>
+├─ index.html                    主教學網站
+├─ google-workspace-lab.html     Hands-on Lab 網頁
+├─ styles.css                    排版與視覺
+├─ script.js                     少量互動
+├─ README.md                     Repo 首頁
+├─ PROJECT-ARCHITECTURE.md       專案架構導讀
+├─ AGENTS.md                     Codex 專案規則
+├─ CLAUDE.md                     Claude Code 專案規則
+├─ labs/
+│  └─ google-workspace-webapp/
+│     ├─ README.md               完整 Lab 步驟
+│     ├─ Code.gs                 Apps Script Backend
+│     └─ Index.html              Apps Script Frontend
+├─ .gitignore
+├─ .env.example
+└─ .nojekyll</code></pre>
 
         <div class="repo-steps">
-          <div><span>01</span><p>先打開 <code>index.html</code>，找一句你在這個網站上看得到的文字。</p></div>
-          <div><span>02</span><p>再打開 <code>styles.css</code>，看同一個 HTML 怎麼被排版。</p></div>
-          <div><span>03</span><p>看 Commits，理解每次修改都是一個可以追蹤的版本。</p></div>
-          <div><span>04</span><p>回到公開網站，理解 <code>main</code> 的內容如何經 GitHub Pages 變成網頁。</p></div>
+          <div><span>01</span><p>打開 <code>index.html</code>，找一句網站上真的看得到的文字。</p></div>
+          <div><span>02</span><p>打開 <code>styles.css</code>，看 HTML 怎麼被排版。</p></div>
+          <div><span>03</span><p>看 Commits，理解每次修改都是一個版本。</p></div>
+          <div><span>04</span><p>回公開網站，理解 <code>main</code> 經 GitHub Pages 變成網頁。</p></div>
         </div>
 
         <pre class="diagram">本機 / AI 修改
@@ -111,43 +151,67 @@ GitHub · main
       ↓
  GitHub Pages
       ↓
-公開教學網站</pre>
+公開網站</pre>
+
+        <h3>5 分鐘 GitHub 練習</h3>
+        <ol>
+          <li>在 Repo 首頁找出預設 Branch：<code>main</code>。</li>
+          <li>打開 <code>index.html</code>，搜尋網站上一句文字。</li>
+          <li>打開 <code>styles.css</code>，找一個 class。</li>
+          <li>打開 Commits，點一個版本看綠色 <code>+</code> 與紅色 <code>-</code>。</li>
+          <li>理解 Git 真正在記錄的是每次修改的差異。</li>
+        </ol>
       </section>
 
       <section id="git">
         <div class="section-label">03</div>
-        <h2>Git 與 GitHub</h2>
-        <p class="section-lead">先理解用途，不需要先背指令。</p>
+        <h2>Git、GitHub 與正式修改流程</h2>
+        <p class="section-lead">先理解用途，不需要先背一堆指令。</p>
 
         <div class="split">
-          <div>
-            <h3>Git</h3>
-            <p>專案的版本記錄。每一次 commit 都像一個存檔點，可以看「改了什麼」、比較版本，也能回到過去。</p>
-          </div>
-          <div>
-            <h3>GitHub</h3>
-            <p>放 Git 專案的線上空間，也提供 Issue、Branch、Pull Request、Actions、Pages 等協作與發布功能。</p>
-          </div>
+          <div><h3>Git = 時光機</h3><p>每一次 commit 都像存檔點。真正重要的是能看 diff：這次到底改了什麼？</p></div>
+          <div><h3>GitHub = 專案總部</h3><p>放 Repo、Issue、Branch、Pull Request、Actions、Pages，讓版本與協作集中在一起。</p></div>
         </div>
 
-        <pre class="diagram">需求 → Branch → 修改 → Test → Pull Request → Merge → main → Deploy</pre>
+        <table>
+          <thead><tr><th>工具</th><th>新手先這樣理解</th></tr></thead>
+          <tbody>
+            <tr><td>Issue</td><td>工作單：這次要解決什麼？</td></tr>
+            <tr><td>Branch</td><td>平行施工區，不直接在正式版本亂改。</td></tr>
+            <tr><td>Pull Request</td><td>改好了，先看 diff、Review，再合併。</td></tr>
+            <tr><td>Merge</td><td>確認沒問題後放進 <code>main</code>。</td></tr>
+            <tr><td>GitHub Pages</td><td>把靜態 HTML / CSS / JS 發布成公開網址。</td></tr>
+          </tbody>
+        </table>
 
-        <div class="note quiet">
-          <strong>GitHub Pages</strong>
-          <span>適合 HTML / CSS / JavaScript 這種靜態網站。它不會直接替你執行 Python 後端或伺服器端 SQLite。</span>
-        </div>
+        <pre class="diagram">Issue → Branch → 修改 → Test → Pull Request → Review → Merge → main → Deploy</pre>
+
+        <h3>Test：AI 說 Done 不代表真的 Done</h3>
+        <ul>
+          <li>桌機版正常嗎？</li>
+          <li>手機版正常嗎？</li>
+          <li>舊功能還在嗎？</li>
+          <li>連結、資料、日期正確嗎？</li>
+          <li>部署後的公開網站也正常嗎？</li>
+        </ul>
+
+        <h3><code>.env</code> / Secret</h3>
+        <p>API Key、密碼、Token 不要 commit 到 GitHub。<code>.env.example</code> 可以示範需要哪些環境變數，但不能放真正的秘密。</p>
+
+        <h3>Deploy 與 Log</h3>
+        <p><strong>Deploy</strong> 是把本機成品真正上線；<strong>Log</strong> 是出錯後的證據。Local 能跑，不代表 Internet 一定能跑。</p>
       </section>
 
       <section id="docs">
         <div class="section-label">04</div>
         <h2>Notion、README 與專案規則</h2>
-        <p class="section-lead">它們都在寫文字，但讀者不同。</p>
+        <p class="section-lead">它們都在寫文字，但讀者與用途不同。</p>
 
         <table>
           <thead><tr><th>地方</th><th>主要讀者</th><th>回答的問題</th></tr></thead>
           <tbody>
-            <tr><td>Notion</td><td>人</td><td>為什麼做？需求與決策是什麼？</td></tr>
-            <tr><td>README.md</td><td>Repo 訪客</td><td>這是什麼？怎麼開始？</td></tr>
+            <tr><td>Notion</td><td>人</td><td>為什麼做？需求、背景、決策、TODO 是什麼？</td></tr>
+            <tr><td>README.md</td><td>Repo 訪客</td><td>這是什麼專案？怎麼開始？</td></tr>
             <tr><td>PROJECT-ARCHITECTURE.md</td><td>開發者</td><td>這個專案由哪些部分組成？</td></tr>
             <tr><td>AGENTS.md / CLAUDE.md</td><td>AI 工程師</td><td>修改時要遵守哪些規則？</td></tr>
           </tbody>
@@ -157,13 +221,23 @@ GitHub · main
 - UI 使用繁體中文
 - 保留現有功能
 - 不要加入不必要的 framework
-- 修改完成後檢查手機版</code></pre>
+- 修改完成後檢查手機版
+- 完成後摘要修改檔案與測試結果</code></pre>
+
+        <pre class="diagram">Notion
+= 我們想做什麼 / 為什麼
+
+README
+= 這個專案是什麼
+
+AGENTS.md / CLAUDE.md
+= AI 修改這個專案時怎麼做</pre>
       </section>
 
       <section id="python">
         <div class="section-label">05</div>
         <h2>Python：目標是看得懂，不是默寫</h2>
-        <p class="section-lead">AI 可以寫大部分語法，但你仍要能看出資料、條件、流程與錯誤大概在做什麼。</p>
+        <p class="section-lead">AI 可以寫大部分語法，但你至少要能看出資料、條件、流程與錯誤大概在做什麼。</p>
 
         <div class="concept-list">
           <div><code>city = "Tokyo"</code><span>變數：替資料取名字</span></div>
@@ -185,15 +259,59 @@ for trip in trips:
     if trip["days"] &gt; 5:
         print(trip["city"])</code></pre>
         <p class="after-code">只要能翻成白話：「把每趟旅行拿出來，找超過五天的，再印出城市」就已經達到這裡的目標。</p>
+
+        <h3>比背語法更重要：看 Error / Traceback</h3>
+        <p>遇到錯誤時，把「預期結果、實際結果、完整 Error」交給 AI，先要求它解釋 root cause，再修改。</p>
+        <pre><code>Expected:
+GET /api/trips 應該回傳旅行資料。
+
+Actual:
+HTTP 500 / KeyError: 'city'
+
+請先解釋 root cause，不要直接改 code。
+再告訴我最小修改方案。</code></pre>
       </section>
 
       <section id="data">
         <div class="section-label">06</div>
-        <h2>SQLite、Backend 與 API</h2>
-        <p class="section-lead">需求變複雜時，再把資料從 HTML 裡拆出去。</p>
+        <h2>從靜態網站走到 SQLite、Backend、API</h2>
+        <p class="section-lead">不要為了「像工程師」一開始就堆技術；等需求真的出現，再讓下一個工具進場。</p>
+
+        <pre class="diagram">現在
+HTML / CSS / JS
+      ↓
+先會看懂
+Python
+      ↓
+資料開始變多
+SQLite
+      ↓
+前台需要取資料
+Backend + API
+      ↓
+真正動態 Web App
+Cloud Deploy</pre>
+
+        <div class="split">
+          <div>
+            <h3>寫死在 HTML</h3>
+            <pre><code>&lt;h2&gt;Tokyo&lt;/h2&gt;
+&lt;p&gt;2026-11-05&lt;/p&gt;</code></pre>
+            <p>兩趟旅行很簡單；五十趟開始很難維護。</p>
+          </div>
+          <div>
+            <h3>資料放 SQLite</h3>
+            <pre><code>trips
+--------------------------
+id | city   | start_date
+1  | Tokyo  | 2026-11-05
+2  | Prague | 2027-03-20</code></pre>
+            <p>畫面與資料分開，才容易新增、搜尋、排序與維護。</p>
+          </div>
+        </div>
 
         <pre class="diagram">Browser / Frontend
-        ↓  request
+        ↓ request
        API
         ↓
 Python / Backend
@@ -202,50 +320,100 @@ Python / Backend
 
         <div class="split">
           <div><h3>SQLite</h3><p>一個檔案就能當資料庫，很適合理解「畫面」和「資料」應該分開。</p></div>
-          <div><h3>API</h3><p>前台不需要直接碰資料庫；API 像服務窗口，負責接收需求並回傳資料。</p></div>
+          <div><h3>API</h3><p>前台不直接碰資料庫；API 像服務窗口，負責接收需求、處理資料並回傳結果。</p></div>
         </div>
       </section>
 
       <section id="connector">
         <div class="section-label">07</div>
-        <h2>Connector 與 MCP</h2>
+        <h2>Connector、MCP 與外部系統</h2>
         <p class="section-lead">讓 AI 能在授權範圍內使用外部服務，而不是每次都靠你複製貼上。</p>
 
-        <pre class="diagram">你提出需求
-    ↓
-Codex / Claude / ChatGPT
-    ↓
-Connector / MCP
-    ↓
-Gmail · Drive · Notion · GitHub · Database</pre>
+        <pre class="diagram">沒有 Connector
+AI ← 你手動貼 Email / PDF / Notion
+
+有 Connector
+AI → 授權的工具 → Gmail / Drive / Notion / GitHub</pre>
 
         <dl class="definitions compact">
-          <div><dt>Connector / App</dt><dd>產品提供的現成整合。登入並授權後，AI 才能使用整合所提供的資料與操作。</dd></div>
-          <div><dt>MCP</dt><dd>讓 AI 工具連接外部服務的一種通用協定，可以把它想成「共同插座規格」。</dd></div>
-          <div><dt>Permission</dt><dd>能讀什麼、能改什麼，不是接上之後就能任意操作整個帳號。</dd></div>
+          <div><dt>Connector / App</dt><dd>產品提供的現成整合。登入並授權後，AI 才能使用整合實際提供的資料與操作。</dd></div>
+          <div><dt>MCP</dt><dd>讓 AI 工具連接外部服務的一種通用協定，可以把它理解成共同的「工具插座規格」。</dd></div>
+          <div><dt>Authentication</dt><dd>先確認「你是誰」。</dd></div>
+          <div><dt>Permission</dt><dd>決定「可以讀什麼、可以改什麼」。</dd></div>
+          <div><dt>Scope</dt><dd>只給完成任務真正需要的範圍。</dd></div>
+          <div><dt>Confirmation</dt><dd>寄信、刪檔、公開發布等寫入動作要特別確認。</dd></div>
         </dl>
 
-        <div class="note quiet">
-          <strong>安全觀念</strong>
-          <span>Authentication 確認你是誰；Permission 決定能做什麼；Scope 盡量只給完成任務需要的範圍；寄信、刪除、公開發布等寫入動作要特別確認。</span>
+        <h3>旅遊例子</h3>
+        <div class="split">
+          <div>
+            <h3>沒有 Connector</h3>
+            <pre><code>我把機票 Email 貼給你。
+這是住宿 PDF。
+這是 Notion 行程。
+請幫我整理。</code></pre>
+          </div>
+          <div>
+            <h3>有 Connector</h3>
+            <pre><code>找 Gmail 的機票確認信，
+再看 Drive 的住宿資料與 Notion 行程，
+整理缺少預約的日期。</code></pre>
+          </div>
         </div>
+
+        <pre class="diagram">你下需求
+   ↓
+Codex / Claude / ChatGPT
+   ↓
+Connector / MCP
+   ↓
+Gmail · Drive · Notion · GitHub · Database
+   ↓
+整理 / 比較 / 更新 / 產生程式</pre>
+
+        <div class="note quiet"><strong>Connector 不是把整個帳號交給 AI。</strong><span>AI 能做什麼取決於帳號本身存取權、你授予的權限、工作區設定，以及該整合實際支援哪些操作。</span></div>
       </section>
 
       <section id="workflow">
         <div class="section-label">08</div>
         <h2>把 AI 放進真正的工作流程</h2>
-        <p class="section-lead">不要從「幫我做完」開始，先學會把規劃與執行分開。</p>
+        <p class="section-lead">不要從「幫我做完」開始。先學會把需求、規劃、施工與驗證分開。</p>
+
+        <pre class="diagram">Notion
+需求
+  ↓
+GitHub Issue
+工作單
+  ↓
+Plan Mode
+先分析
+  ↓
+Branch
+施工區
+  ↓
+Codex / Claude
+實作
+  ↓
+Test
+驗證
+  ↓
+Pull Request
+看 diff
+  ↓
+Merge → Deploy</pre>
 
         <div class="prompt-grid">
           <div>
             <h3>先 Plan</h3>
-            <pre><code>先不要修改任何檔案。
+            <pre><code>我要新增 Prague 行程。
+先不要修改任何檔案。
 
 請先：
-1. 看專案結構
-2. 找出需要修改的檔案
-3. 說明可能影響的功能
-4. 提出實作計畫</code></pre>
+1. 看目前專案結構
+2. 找出需要修改哪些檔案
+3. 說明資料應該放哪裡
+4. 說明可能影響哪些既有功能
+5. 提出實作與測試計畫</code></pre>
           </div>
           <div>
             <h3>再 Execute</h3>
@@ -253,29 +421,74 @@ Gmail · Drive · Notion · GitHub · Database</pre>
 
 限制：
 - 保留現有功能
-- 使用繁體中文
+- UI 使用繁體中文
 - 手機版不能壞
-- 完成後自行驗證</code></pre>
+- 完成後自行測試
+- 最後摘要修改檔案與結果</code></pre>
           </div>
         </div>
 
-        <pre class="diagram">需求 → Plan → Branch → AI 實作 → Test → PR → Merge → Deploy</pre>
+        <div class="note"><strong>AI 不只是替你打字。</strong><span>好的 AI Coding 是：讓 AI 先理解現況與限制，再實作；你負責判斷方向、Review diff、驗證結果。</span></div>
+      </section>
+
+      <section id="lab">
+        <div class="section-label">09</div>
+        <h2>Hands-on：真的做一個 Gmail + Google Drive 網站</h2>
+        <p class="section-lead">這一章不只講 Connector。你會真的建立 GCP Project、啟用 API、設定 OAuth，再把 Gmail / Drive 放進自己的 Web App。</p>
+
+        <pre class="diagram">建立 Standard GCP Project
+        ↓
+Enable Gmail API + Drive API
+        ↓
+Google Auth / OAuth
+        ↓
+Apps Script 綁 Project Number
+        ↓
+Code.gs Backend + Index.html Frontend
+        ↓
+GmailApp / DriveApp
+        ↓
+Deploy Web App
+        ↓
+Travel Workspace Dashboard</pre>
+
+        <table>
+          <thead><tr><th>你會做</th><th>你會理解</th></tr></thead>
+          <tbody>
+            <tr><td>建立 GCP Project</td><td>Project ID / Project Number / Cloud 設定</td></tr>
+            <tr><td>Enable Gmail / Drive API</td><td>API 為什麼需要由 Project 明確啟用</td></tr>
+            <tr><td>Google Auth Platform</td><td>Branding、Audience、Test users、Scopes</td></tr>
+            <tr><td>Apps Script</td><td>Frontend / Backend 分工與權限</td></tr>
+            <tr><td>Deploy</td><td>誰能開網站 vs Backend 用誰的帳號執行</td></tr>
+            <tr><td>Debug</td><td>Browser → Apps Script → GCP / OAuth 分層排查</td></tr>
+          </tbody>
+        </table>
+
+        <p><a href="./google-workspace-lab.html"><strong>開始 Google Workspace Hands-on Lab →</strong></a></p>
+        <p><a href="https://github.com/k1everwann/codex-starter-guide/tree/main/labs/google-workspace-webapp" target="_blank" rel="noreferrer">查看 Lab 的完整 Code 與 README ↗</a></p>
       </section>
 
       <section id="roadmap">
-        <div class="section-label">09</div>
+        <div class="section-label">10</div>
         <h2>建議學習順序</h2>
         <p class="section-lead">用同一個專案一路往下，不要拆成十個互不相關的小練習。</p>
 
         <ol class="roadmap">
-          <li><span>01</span><div><strong>GitHub + GitHub Pages</strong><p>先知道程式放在哪裡，以及網站怎麼公開。</p></div></li>
-          <li><span>02</span><div><strong>README + 專案架構</strong><p>學會看 Repo，而不只是看最後畫面。</p></div></li>
-          <li><span>03</span><div><strong>Notion + AGENTS.md / CLAUDE.md</strong><p>把需求與 AI 規則分開管理。</p></div></li>
-          <li><span>04</span><div><strong>Plan → Execute → Test → PR</strong><p>建立真正的 AI Coding 工作方式。</p></div></li>
-          <li><span>05</span><div><strong>Python 概念</strong><p>至少讀得懂 AI 寫的基本程式與錯誤。</p></div></li>
-          <li><span>06</span><div><strong>Connector / MCP</strong><p>理解 AI 如何跨 Gmail、Drive、Notion、GitHub 等系統工作。</p></div></li>
-          <li><span>07</span><div><strong>SQLite → API → Backend</strong><p>等真的需要動態資料時再進下一層。</p></div></li>
+          <li><span>01</span><div><strong>GitHub + GitHub Pages</strong><p>先知道程式放在哪裡、版本怎麼保存、網站怎麼公開。</p></div></li>
+          <li><span>02</span><div><strong>README + 專案架構</strong><p>學會看 Repo，不只看最後畫面。</p></div></li>
+          <li><span>03</span><div><strong>Notion + AGENTS.md / CLAUDE.md</strong><p>把需求、人看的文件與 AI 規則分開。</p></div></li>
+          <li><span>04</span><div><strong>Plan → Branch → Execute → Test → PR</strong><p>建立真正的 AI Coding 工作方式。</p></div></li>
+          <li><span>05</span><div><strong>Python 概念</strong><p>讀得懂 AI 寫的基本程式與 Traceback。</p></div></li>
+          <li><span>06</span><div><strong>Connector / MCP</strong><p>理解 AI 如何在授權下跨系統工作。</p></div></li>
+          <li><span>07</span><div><strong>GCP + Gmail / Drive Hands-on</strong><p>真的完成一個有權限、有 Backend、有 Deploy 的 Web App。</p></div></li>
+          <li><span>08</span><div><strong>SQLite → API → Backend</strong><p>等真的需要動態資料時，再進下一層。</p></div></li>
+          <li><span>09</span><div><strong>擴充同一個作品</strong><p>Trip Card、Calendar、AI Summary，而不是重新做另一個無關 Demo。</p></div></li>
         </ol>
+
+        <div class="note">
+          <strong>最後要學的不是「怎麼叫 AI 寫 Code」。</strong>
+          <span>而是能清楚告訴 AI：這是需求、這是現況、這是限制、這是規則；先分析方案，確認後實作，完成後驗證。</span>
+        </div>
       </section>
 
       <footer>
