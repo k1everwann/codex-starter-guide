@@ -2,23 +2,6 @@ async function loadIntegratedLab() {
   const lab = document.querySelector('#lab');
   if (!lab) return;
 
-  // Main guide should stay on one page: remove links that send readers to
-  // the old standalone lab page and point the intro directly to this section.
-  document
-    .querySelectorAll('a[href="./google-workspace-lab.html"]')
-    .forEach((link) => {
-      if (link.closest('.sidebar-links')) {
-        link.remove();
-      } else {
-        link.href = '#lab';
-        if (link.closest('.intro-links')) {
-          link.textContent = '直接做 Gmail + Drive Lab →';
-        } else {
-          link.innerHTML = '<strong>從 Step 1：建立 GCP Project 開始 ↓</strong>';
-        }
-      }
-    });
-
   try {
     const response = await fetch('./lab-content.html');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
