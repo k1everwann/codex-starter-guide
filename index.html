@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Codex / Claude 工程入門指南：用一個真的 GitHub 專案理解 AI Coding、Git、Python、資料庫、Connector 與 Google Workspace。" />
   <title>Codex / Claude 工程入門指南</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260831-3" />
 </head>
 <body>
   <header class="mobile-header">
@@ -49,7 +49,7 @@
         </div>
         <div class="note">
           <strong>這個網站本身就是教材。</strong>
-          <span>你現在看的頁面，就是由同一個 GitHub Repo 的 <code>index.html</code>、<code>styles.css</code> 和 <code>script.js</code> 組成，再透過 GitHub Pages 發布。</span>
+          <span>你現在看的頁面，就是由同一個 GitHub Repo 的主頁、教學片段、CSS 和 JavaScript 組成，再透過 GitHub Pages 發布。</span>
         </div>
 
         <pre class="diagram">需求 / 文件
@@ -118,11 +118,16 @@ Rules   = 公司 SOP</pre>
         <p class="section-lead">打開 <a href="https://github.com/k1everwann/codex-starter-guide" target="_blank" rel="noreferrer">github.com/k1everwann/codex-starter-guide ↗</a>，一邊看 Repo，一邊對照網站。</p>
 
         <pre class="tree"><code>codex-starter-guide/
-├─ index.html                    主教學網站
-├─ lab-content.html              主頁內載入的完整 Hands-on Lab
+├─ index.html                    主教學網站骨架
+├─ git-practice.html             Git / PR 小實作
+├─ playgrounds.html              Python / SQL 互動練習內容
+├─ lab-content.html              完整 Google Workspace Lab
+├─ final-challenge.html          最後挑戰
 ├─ google-workspace-lab.html     舊網址相容轉址
-├─ styles.css                    排版與視覺
-├─ script.js                     載入 Lab 與導覽互動
+├─ styles.css                    主網站排版與視覺
+├─ playgrounds.css               互動練習區樣式
+├─ script.js                     組合各教學片段與導覽
+├─ playgrounds.js                Python / SQLite 瀏覽器執行器
 ├─ README.md                     Repo 首頁
 ├─ PROJECT-ARCHITECTURE.md       專案架構導讀
 ├─ AGENTS.md                     Codex 專案規則
@@ -241,7 +246,7 @@ AGENTS.md / CLAUDE.md
 
         <div class="concept-list">
           <div><code>city = "Tokyo"</code><span>變數：替資料取名字</span></div>
-          <div><code>["Tokyo", "Prague"]</code><span>List：一串資料</span></div>
+          <div><code>["Hokkaido", "Tokyo", "Chiang Mai"]</code><span>List：一串資料</span></div>
           <div><code>{"city": "Tokyo"}</code><span>Dictionary：有欄位名稱的資料</span></div>
           <div><code>if days &gt; 5:</code><span>if：條件判斷</span></div>
           <div><code>for trip in trips:</code><span>for：逐筆處理</span></div>
@@ -251,8 +256,9 @@ AGENTS.md / CLAUDE.md
         </div>
 
         <pre><code>trips = [
+    {"city": "Hokkaido", "days": 7},
     {"city": "Tokyo", "days": 5},
-    {"city": "Prague", "days": 7}
+    {"city": "Chiang Mai", "days": 4}
 ]
 
 for trip in trips:
@@ -295,17 +301,18 @@ Cloud Deploy</pre>
         <div class="split">
           <div>
             <h3>寫死在 HTML</h3>
-            <pre><code>&lt;h2&gt;Tokyo&lt;/h2&gt;
-&lt;p&gt;2026-11-05&lt;/p&gt;</code></pre>
+            <pre><code>&lt;h2&gt;Hokkaido&lt;/h2&gt;
+&lt;p&gt;7 days&lt;/p&gt;</code></pre>
             <p>兩趟旅行很簡單；五十趟開始很難維護。</p>
           </div>
           <div>
             <h3>資料放 SQLite</h3>
             <pre><code>trips
---------------------------
-id | city   | start_date
-1  | Tokyo  | 2026-11-05
-2  | Prague | 2027-03-20</code></pre>
+--------------------------------
+id | city       | days | budget
+1  | Hokkaido   | 7    | 42000
+2  | Tokyo      | 5    | 28000
+3  | Chiang Mai | 4    | 18000</code></pre>
             <p>畫面與資料分開，才容易新增、搜尋、排序與維護。</p>
           </div>
         </div>
@@ -405,7 +412,7 @@ Merge → Deploy</pre>
         <div class="prompt-grid">
           <div>
             <h3>先 Plan</h3>
-            <pre><code>我要新增 Prague 行程。
+            <pre><code>我要新增 Chiang Mai 行程。
 先不要修改任何檔案。
 
 請先：
@@ -471,6 +478,6 @@ Merge → Deploy</pre>
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260831-3"></script>
 </body>
 </html>
