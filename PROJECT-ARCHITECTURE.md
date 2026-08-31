@@ -13,9 +13,10 @@ Repo：<https://github.com/k1everwann/codex-starter-guide>
 ```text
 codex-starter-guide/
 ├─ index.html                    ← 主教學網站骨架
+├─ ai-guide.html                 ← AI 模型 / 推理強度 / 工作模式
 ├─ git-practice.html             ← Git / PR 小實作
 ├─ playgrounds.html              ← Python / SQL 互動練習內容
-├─ lab-content.html              ← 同一頁載入的完整 Hands-on Lab
+├─ lab-content.html              ← 同一頁載入的 Google Workspace 完整實作
 ├─ final-challenge.html          ← 最後挑戰
 ├─ google-workspace-lab.html     ← 舊網址相容轉址
 ├─ styles.css                    ← 主網站外觀、排版、RWD
@@ -28,11 +29,11 @@ codex-starter-guide/
 ├─ CLAUDE.md                     ← Claude Code 的專案規則
 ├─ labs/
 │  └─ google-workspace-webapp/
-│     ├─ README.md               ← GCP → Gmail / Drive 完整實作步驟
-│     ├─ Code.gs                 ← Apps Script Backend
-│     └─ Index.html              ← Apps Script Frontend
+│     ├─ README.md               ← Google Cloud → Gmail / Drive 完整實作步驟
+│     ├─ Code.gs                 ← Apps Script 後端
+│     └─ Index.html              ← Apps Script 前端
 ├─ .gitignore                    ← 哪些檔案不要進 Git
-├─ .env.example                  ← 環境變數 / Secret 範例
+├─ .env.example                  ← 環境變數 / 機密資訊（Secret）範例
 └─ .nojekyll                     ← GitHub Pages 靜態站設定
 ```
 
@@ -40,11 +41,11 @@ codex-starter-guide/
 
 ```text
 index.html          = 主頁骨架
-內容片段             = Git 練習 / Playground / Hands-on / Final Challenge
+內容片段             = AI 導讀 / Git 練習 / Playground / Google Workspace 實作 / 最後挑戰
 styles.css          = 主站外觀
 playgrounds.css     = 可編輯練習區外觀
 script.js           = 把內容片段組回同一頁
-playgrounds.js      = 讓 Python / SQLite 在 Browser 執行
+playgrounds.js      = 讓 Python / SQLite 在瀏覽器執行
 README              = 給人看的入口
 AGENTS              = 給 Codex 的 SOP
 CLAUDE              = 給 Claude Code 的 SOP
@@ -63,6 +64,7 @@ Pages               = 把 main 的靜態網站發布到 Internet
 index.html
    │
    │ script.js 載入
+   ├────────► ai-guide.html
    ├────────► git-practice.html
    ├────────► playgrounds.html
    ├────────► lab-content.html
@@ -75,6 +77,7 @@ index.html
 所以：
 
 - `index.html` 負責主要章節與整體順序。
+- `ai-guide.html` 放模型（Model）、推理強度（Reasoning）與工作模式（Work Mode）。
 - `git-practice.html` 放 10 分鐘 Git / PR 實作。
 - `playgrounds.html` 放 Python / SQL 的可編輯介面。
 - `lab-content.html` 放 09.1～09.10 的 Google Workspace 詳細實作。
@@ -88,17 +91,17 @@ index.html
 
 ## 3. 互動式 Python / SQL 為什麼 GitHub Pages 也能做？
 
-GitHub Pages 本身不能執行 Python server 或 SQLite server，但 Browser 可以執行 WebAssembly。
+GitHub Pages 本身不能執行 Python server 或 SQLite server，但瀏覽器可以執行 WebAssembly。
 
 這個專案因此把練習做成：
 
 ```text
-Browser
+瀏覽器（Browser）
    ├─ Pyodide → Python
    └─ sql.js   → SQLite
 ```
 
-`playgrounds.js` 只在第一次按 Run 時載入 runtime，避免一開網站就下載不必要的資源。
+`playgrounds.js` 只在第一次按 Run 時載入執行環境，避免一開網站就下載不必要的資源。
 
 練習資料統一使用：
 
@@ -120,7 +123,7 @@ Chiang Mai 4 days   18000
         │ 修改檔案
         ▼
       Git
-   建立 commit
+   建立提交（Commit）
         │
         ▼
  GitHub Repository
@@ -152,11 +155,12 @@ GitHub Pages 不是另一份網站；它發布的來源就是這個 Repo 裡的�
 
 目前 JavaScript 會：
 
-1. 載入 Git 小實作。
-2. 載入 Python / SQL Playground。
-3. 載入完整 Google Workspace Lab。
-4. 載入 Final Challenge。
-5. 根據閱讀位置高亮左側導覽。
+1. 載入 AI 模型與模式導讀。
+2. 載入 Git 小實作。
+3. 載入 Python / SQL Playground。
+4. 載入完整 Google Workspace 實作。
+5. 載入最後挑戰。
+6. 根據閱讀位置高亮左側導覽。
 
 這是一個很好的例子：**JavaScript 不一定要很複雜，但可以負責把不同檔案組成一個完整體驗。**
 
@@ -169,11 +173,11 @@ GitHub Pages 不是另一份網站；它發布的來源就是這個 Repo 裡的�
 ```text
 Run Python
 → 把 textarea 裡的文字交給 Pyodide
-→ 顯示 Output
+→ 顯示執行結果（Output）
 
 Run SQL
 → 把 textarea 裡的 SQL 交給 sql.js
-→ 顯示 Result table
+→ 顯示查詢結果（Result）
 ```
 
 ### 第四步：看 `styles.css`
@@ -219,35 +223,35 @@ AGENTS.md / CLAUDE.md
 
 ## 7. Git 真正要學的是「差異」，不是指令
 
-打開 Commit 歷史：
+打開提交紀錄（Commits）：
 <https://github.com/k1everwann/codex-starter-guide/commits/main/>
 
-點任一個 commit，你會看到：
+點任一個提交（Commit），你會看到：
 
 ```text
 綠色 +  = 這次新增
 紅色 -  = 這次刪除
 ```
 
-這就是 `diff`。工程師真正關心的通常不是整份檔案，而是：**這次修改到底改了什麼？**
+這就是差異（Diff）。工程師真正關心的通常不是整份檔案，而是：**這次修改到底改了什麼？**
 
-所以 Codex / Claude 改完後，養成看 diff 的習慣，比先背大量 Git 指令重要。
+所以 Codex / Claude 改完後，養成看差異的習慣，比先背大量 Git 指令重要。
 
 ---
 
-## 8. Branch 和 Pull Request 可以怎麼想？
+## 8. 分支（Branch）和 Pull Request（PR）可以怎麼想？
 
 ```text
 main
 = 現在的正式版本
 
 feature/new-section
-= 另外開的施工區
+= 另外開的施工區，也就是分支（Branch）
 
-Pull Request
+Pull Request（PR）
 = 把施工區的修改拿來比較與檢查
 
-Merge
+合併（Merge）
 = 確認沒問題後放進 main
 ```
 
@@ -258,9 +262,9 @@ main ───────────────────────●─
                \
                 Pull Request
                     │
-                 Review
+                檢查（Review）
                     │
-                  Merge
+                合併（Merge）
 ```
 
 ---
@@ -277,9 +281,9 @@ https://github.com/k1everwann/codex-starter-guide
 1. 專案入口是哪個檔案？
 2. index.html 為什麼沒有塞進全部教學內容？
 3. script.js 會載入哪些內容片段？
-4. playgrounds.js 為什麼能在 Browser 執行 Python / SQLite？
+4. playgrounds.js 為什麼能在瀏覽器執行 Python / SQLite？
 5. README.md、AGENTS.md、CLAUDE.md 的用途有何不同？
-6. 如果我要新增一個 Hands-on 步驟，你預計修改哪些檔案？
+6. 如果我要新增一個實作步驟，你預計修改哪些檔案？
 ```
 
 重點是練習：**讀現況 → 分析 → 規劃 → 再執行。**
@@ -303,15 +307,15 @@ my-travel-site/
 資料與功能變多後，可以自然演進成：
 
 ```text
-Frontend
+前端（Frontend）
    │
    ▼
-Backend / API
+後端（Backend）/ API
    │
    ├─ Gmail / Drive / Calendar
    │
    ▼
-SQLite / Database
+SQLite / 資料庫（Database）
 ```
 
 不要為了「像工程師」而一開始堆一堆技術。**讓需求逼出下一個工具**，學得最快。
