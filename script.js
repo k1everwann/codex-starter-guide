@@ -1,4 +1,4 @@
-const ASSET_VERSION = '20260831-2';
+const ASSET_VERSION = '20260831-4';
 
 function versioned(path) {
   const separator = path.includes('?') ? '&' : '?';
@@ -52,6 +52,28 @@ function loadLocalStylesheet(href) {
     link.addEventListener('error', reject, { once: true });
     document.head.appendChild(link);
   });
+}
+
+async function loadAiGuide() {
+  const ai = document.querySelector('#ai');
+  if (!ai) return;
+
+  try {
+    const guide = await fetchFragment('./ai-guide.html');
+    ai.replaceChildren(guide);
+  } catch (error) {
+    console.error('Failed to load AI guide:', error);
+  }
+}
+
+function syncRepoTree() {
+  const tree = document.querySelector('#repo .tree code');
+  if (!tree || tree.textContent.includes('ai-guide.html')) return;
+
+  tree.textContent = tree.textContent.replace(
+    '├─ git-practice.html',
+    '├─ ai-guide.html                 AI 模型 / 推理 / 模式導讀\n├─ git-practice.html'
+  );
 }
 
 async function loadGitPractice() {
@@ -230,6 +252,8 @@ function setupSectionObserver() {
 }
 
 async function boot() {
+  await loadAiGuide();
+  syncRepoTree();
   await loadGitPractice();
   await loadPlaygrounds();
   await loadIntegratedLab();
