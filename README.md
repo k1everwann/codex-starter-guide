@@ -7,16 +7,17 @@
 - 🌐 完整教學網站：<https://k1everwann.github.io/codex-starter-guide/>
 - 🐙 GitHub Repo：<https://github.com/k1everwann/codex-starter-guide>
 
-教學網站從 AI Coding、Git / GitHub、Python、Data / API、Connector 一路往下，**同一頁直接接著做 Gmail + Google Drive Hands-on Lab**，不需要再開另一個教學網站。
+教學網站從 AI Coding、Git / GitHub、Python、Data / API、Connector 一路往下，途中可以直接執行 Python / SQLite，後半段再接 Gmail + Google Drive Hands-on Lab。
 
 ## 建議怎麼學
 
-1. 先開主教學網站，理解 Model / Agent / Mode、Git / GitHub、README / Rules、Python、Data / API、Connector。
-2. 回到這個 Repo，看 `index.html`、`styles.css`、`script.js`，對照實際畫面。
-3. 看 Commits，理解 Git 真正在保存的是什麼。
-4. 回到主教學網站的 `Hands-on Lab`，從 GCP Project、API、OAuth 一路做到 Apps Script Web App。
-5. 實作時直接使用 `labs/google-workspace-webapp/` 裡的 Backend / Frontend 範例。
-6. 最後再把自己的旅遊網站照同樣方式整理、擴充。
+1. 先開主教學網站，理解 Model / Agent / Mode、Git / GitHub、README / Rules。
+2. 做一次 10 分鐘 Git 練習：Branch → Commit → Pull Request → Merge。
+3. 在 Python / SQL Playground 改一行程式，按 Run 看結果。
+4. 回到這個 Repo，看 `index.html`、`styles.css`、`script.js`，對照實際畫面。
+5. 看 Commits，理解 Git 真正在保存的是什麼。
+6. 回到主教學網站的 `Hands-on Lab`，從 GCP Project、API、OAuth 一路做到 Apps Script Web App。
+7. 最後把自己的旅遊網站照同樣方式整理、擴充。
 
 👉 更完整的專案導讀請看：[PROJECT-ARCHITECTURE.md](./PROJECT-ARCHITECTURE.md)
 
@@ -58,11 +59,16 @@ Deploy Web App
 
 ```text
 codex-starter-guide/
-├─ index.html                    ← 主教學網站
+├─ index.html                    ← 主教學網站骨架
+├─ git-practice.html             ← Git / PR 小實作
+├─ playgrounds.html              ← Python / SQL 互動練習內容
 ├─ lab-content.html              ← 主頁內載入的完整 Hands-on Lab
+├─ final-challenge.html          ← 最後挑戰
 ├─ google-workspace-lab.html     ← 舊網址相容轉址
-├─ styles.css                    ← 外觀、排版、RWD
-├─ script.js                     ← 載入 Lab 與導覽互動
+├─ styles.css                    ← 主網站外觀、排版、RWD
+├─ playgrounds.css               ← 互動練習區樣式
+├─ script.js                     ← 組合教學片段與導覽互動
+├─ playgrounds.js                ← 瀏覽器內執行 Python / SQLite
 ├─ README.md                     ← Repo 的入口
 ├─ PROJECT-ARCHITECTURE.md       ← 專案架構導讀
 ├─ AGENTS.md                     ← Codex 的專案規則
@@ -82,7 +88,7 @@ codex-starter-guide/
 ```text
 HTML        = 內容與結構
 CSS         = 外觀
-JavaScript  = 互動 / 載入其他頁面片段
+JavaScript  = 互動 / 組合頁面片段
 README      = 給人看的入口
 AGENTS      = 給 Codex 的 SOP
 CLAUDE      = 給 Claude Code 的 SOP
@@ -104,7 +110,8 @@ GCP Project = API / OAuth / Cloud 設定所在的位置
 - Issue、Branch、Pull Request
 - Test、Secret、Deploy、Log
 - Python：只學到看得懂 AI 寫的程式
-- SQLite、API 的概念
+- 瀏覽器內可直接執行的 Python Playground
+- SQLite / SQL Playground 與 API 概念
 - Gmail / Google Drive / Notion Connector 與 MCP
 - GCP Project、Google Workspace API、OAuth 的完整實作流程
 
@@ -148,7 +155,7 @@ https://github.com/k1everwann/codex-starter-guide
 
 請告訴我：
 1. 專案入口是哪個檔案？
-2. HTML / CSS / JavaScript 各負責什麼？
+2. 主頁如何載入 Git 練習、Playground 與 Hands-on Lab？
 3. README、AGENTS.md、CLAUDE.md 的讀者有何不同？
 4. GitHub Pages 如何把這個 Repo 變成網站？
 5. 如果我要新增一個章節，你預計改哪些檔案？
