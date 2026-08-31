@@ -11,10 +11,10 @@
 
 ## 建議怎麼學
 
-1. 先開主教學網站，理解 Model / Agent / Mode、Git / GitHub、README / Rules。
+1. 先開主教學網站，分清楚 Model、Reasoning、Work Mode 與 Agent。
 2. 做一次 10 分鐘 Git 練習：Branch → Commit → Pull Request → Merge。
 3. 在 Python / SQL Playground 改一行程式，按 Run 看結果。
-4. 回到這個 Repo，看 `index.html`、`styles.css`、`script.js`，對照實際畫面。
+4. 回到這個 Repo，看 `index.html`、`ai-guide.html`、`styles.css`、`script.js`，對照實際畫面。
 5. 看 Commits，理解 Git 真正在保存的是什麼。
 6. 回到主教學網站的 `Hands-on Lab`，從 GCP Project、API、OAuth 一路做到 Apps Script Web App。
 7. 最後把自己的旅遊網站照同樣方式整理、擴充。
@@ -60,6 +60,7 @@ Deploy Web App
 ```text
 codex-starter-guide/
 ├─ index.html                    ← 主教學網站骨架
+├─ ai-guide.html                 ← AI 模型 / 推理 / 工作模式導讀
 ├─ git-practice.html             ← Git / PR 小實作
 ├─ playgrounds.html              ← Python / SQL 互動練習內容
 ├─ lab-content.html              ← 主頁內載入的完整 Hands-on Lab
@@ -102,7 +103,9 @@ GCP Project = API / OAuth / Cloud 設定所在的位置
 
 ## 這個網站會教什麼
 
-- Model / Agent / Mode 的差別
+- Model / Agent / Reasoning / Work Mode 的差別
+- Claude Code 的 Haiku / Sonnet / Opus / Fable 5 定位
+- ChatGPT GPT-5.6 的 Luna / Sol / Sol Pro 與推理強度概念
 - Claude Code Plan Mode 與 Codex Plan / Default 的概念
 - Git 與 GitHub
 - GitHub Pages
@@ -155,7 +158,7 @@ https://github.com/k1everwann/codex-starter-guide
 
 請告訴我：
 1. 專案入口是哪個檔案？
-2. 主頁如何載入 Git 練習、Playground 與 Hands-on Lab？
+2. 主頁如何載入 AI 導讀、Git 練習、Playground 與 Hands-on Lab？
 3. README、AGENTS.md、CLAUDE.md 的讀者有何不同？
 4. GitHub Pages 如何把這個 Repo 變成網站？
 5. 如果我要新增一個章節，你預計改哪些檔案？
