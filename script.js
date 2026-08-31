@@ -9,6 +9,27 @@ async function fetchFragment(path) {
   return fragment;
 }
 
+function loadLocalScript(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      if (existing.dataset.loaded === 'true') resolve();
+      else existing.addEventListener('load', resolve, { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.addEventListener('load', () => {
+      script.dataset.loaded = 'true';
+      resolve();
+    }, { once: true });
+    script.addEventListener('error', reject, { once: true });
+    document.head.appendChild(script);
+  });
+}
+
 async function loadGitPractice() {
   const git = document.querySelector('#git');
   if (!git) return;
@@ -17,6 +38,30 @@ async function loadGitPractice() {
     git.after(await fetchFragment('./git-practice.html'));
   } catch (error) {
     console.error('Failed to load Git practice:', error);
+  }
+}
+
+async function loadPlaygrounds() {
+  const python = document.querySelector('#python');
+  const data = document.querySelector('#data');
+  if (!python || !data) return;
+
+  try {
+    const response = await fetch('./playgrounds.html');
+    if (!response.ok) throw new Error(`playgrounds.html: HTTP ${response.status}`);
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = await response.text();
+    const pythonPlayground = wrapper.querySelector('#python-playground');
+    const sqlPlayground = wrapper.querySelector('#sql-playground');
+
+    if (pythonPlayground) python.after(pythonPlayground);
+    if (sqlPlayground) data.after(sqlPlayground);
+
+    await loadLocalScript('./playgrounds.js');
+    window.initInteractivePlaygrounds?.();
+  } catch (error) {
+    console.error('Failed to load interactive playgrounds:', error);
   }
 }
 
@@ -141,6 +186,8 @@ function setupSectionObserver() {
     const id = visible.target.id;
     let activeHref = `#${id}`;
     if (id === 'git-practice') activeHref = '#git';
+    if (id === 'python-playground') activeHref = '#python';
+    if (id === 'sql-playground') activeHref = '#data';
     if (id.startsWith('lab-') || id === 'final-challenge') activeHref = '#lab';
 
     links.forEach((link) => {
@@ -158,6 +205,7 @@ function setupSectionObserver() {
 
 async function boot() {
   await loadGitPractice();
+  await loadPlaygrounds();
   await loadIntegratedLab();
   await loadFinalChallenge();
   setupSectionObserver();
