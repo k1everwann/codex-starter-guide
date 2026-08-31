@@ -1,18 +1,18 @@
 <!-- Loaded into #ai so model, reasoning level, and work mode stay clearly separated. -->
 <div class="section-label">01</div>
 <h2>先分清楚：模型、推理強度、工作模式</h2>
-<p class="section-lead">這三件事常常長在同一個選單裡，所以很容易混在一起。先記一個簡單原則：模型是「哪顆腦」、推理強度是「想多久」、工作模式是「現在能不能動手改專案」。</p>
+<p class="section-lead">這三件事常常出現在同一個選單裡，所以很容易被當成同一件事。這一章固定用同一套名稱：<strong>模型（Model）</strong>是「哪顆腦」、<strong>推理強度（Reasoning）</strong>是「這次想多久」、<strong>工作模式（Work Mode）</strong>是「現在允許 AI 做到哪一步」。</p>
 
 <dl class="definitions">
-  <div><dt>Model</dt><dd><strong>哪顆腦在想。</strong> 不同模型在速度、能力、成本與長任務表現上有不同定位。</dd></div>
-  <div><dt>Agent</dt><dd><strong>誰在做事。</strong> Codex / Claude Code 不只聊天，還能讀 Repo、改檔案、執行工具與測試。</dd></div>
-  <div><dt>Reasoning</dt><dd><strong>這次要想多久。</strong> 同一個模型通常可以用不同推理強度處理簡單或複雜工作。</dd></div>
-  <div><dt>Work Mode</dt><dd><strong>現在允許它做什麼。</strong> Plan 先研究與規劃；Execute / Default 類模式才進入實作。</dd></div>
-  <div><dt>Rules</dt><dd><strong>做事要遵守什麼。</strong> 固定規則放在 <code>AGENTS.md</code> 或 <code>CLAUDE.md</code>，不用每次重講。</dd></div>
+  <div><dt>模型（Model）</dt><dd><strong>哪顆腦在想。</strong> 不同模型在速度、能力、成本與長任務表現上有不同定位。</dd></div>
+  <div><dt>Agent（執行者）</dt><dd><strong>誰在做事。</strong> Codex / Claude Code 不只聊天，還能讀 Repo、改檔案、執行工具與測試。</dd></div>
+  <div><dt>推理強度（Reasoning）</dt><dd><strong>這次要想多久。</strong> 同一個模型可以用不同推理投入處理簡單或複雜工作。</dd></div>
+  <div><dt>工作模式（Work Mode）</dt><dd><strong>現在允許它做什麼。</strong> 規劃模式（Plan Mode）先研究與規劃；執行模式（Execute / Default）才進入實作。</dd></div>
+  <div><dt>專案規則（Rules）</dt><dd><strong>做事要遵守什麼。</strong> 固定規則放在 <code>AGENTS.md</code> 或 <code>CLAUDE.md</code>，不用每次重講。</dd></div>
 </dl>
 
-<h3>第一層：模型本身</h3>
-<p>先只看「這顆模型大概適合什麼」，不要把 Plan 或 High 之類的設定混進來。</p>
+<h3>第一層：模型（Model）</h3>
+<p>先只看「這顆模型大概適合什麼」。這裡不要把規劃模式或推理強度混進來。</p>
 
 <h3>Claude Code：模型怎麼選</h3>
 <table>
@@ -25,56 +25,67 @@
   </tbody>
 </table>
 
-<h3>ChatGPT：GPT-5.6 模型怎麼看</h3>
+<h3>GPT-5.6：Luna、Terra、Sol 怎麼分</h3>
 <table>
-  <thead><tr><th>模型</th><th>新手先這樣理解</th></tr></thead>
+  <thead><tr><th>模型</th><th>定位</th><th>新手先這樣理解</th></tr></thead>
   <tbody>
-    <tr><td>GPT-5.6 Luna</td><td>效率取向。Free / Go 的日常預設與 Think 主要使用 Luna。</td></tr>
-    <tr><td>GPT-5.6 Sol</td><td>旗艦主力。適合 coding、研究、規劃與比較複雜的知識工作；符合資格的付費方案會用它支援多個推理強度。</td></tr>
-    <tr><td>GPT-5.6 Sol Pro</td><td>最高能力取向，適合很難或需要較長時間完成的工作流程。</td></tr>
+    <tr><td>GPT-5.6 Luna</td><td>最快、成本最低</td><td>日常小問題與速度優先工作。Free / Go 的一般 ChatGPT 體驗主要由 Luna 支援。</td></tr>
+    <tr><td>GPT-5.6 Terra</td><td>能力、速度、成本的平衡款</td><td>比 Luna 更適合一般工作，又比 Sol 更偏效率；可在支援的 Work、Codex 與 API 情境使用。</td></tr>
+    <tr><td>GPT-5.6 Sol</td><td>旗艦主力</td><td>coding、研究、規劃與複雜知識工作。符合資格的付費 ChatGPT 方案以 Sol 支援 Instant、Medium、High、Extra High。</td></tr>
+    <tr><td>GPT-5.6 Sol Pro</td><td>最高能力取向</td><td>很難、很長的工作流程。ChatGPT 的 Pro 選項會使用 Sol Pro。</td></tr>
   </tbody>
 </table>
 
 <div class="note quiet">
-  <strong>不用硬把 Claude 和 GPT 做一對一配對。</strong>
-  <span>它們不是同一家公司、也不是同一套 benchmark。第一階段只需要知道任務大概是「快的小事、日常主力、複雜推理、超難長任務」哪一種。</span>
+  <strong>Terra 為什麼平常 ChatGPT 看不到？</strong>
+  <span>Terra 與 Luna 不是標準 ChatGPT 對話裡可直接手動選的模型；視方案與產品而定，它們可在 Work、Codex 使用，開發者也可透過 API 使用。標準付費 ChatGPT 的主要選擇則圍繞 Sol、推理強度與 Sol Pro。</span>
 </div>
 
-<h3>如果只是想快速選，可以先這樣</h3>
+<div class="note quiet">
+  <strong>不要硬把 Claude 和 GPT 做一對一配對。</strong>
+  <span>它們不是同一家公司，也不是同一套能力刻度。第一階段只要會依任務判斷「速度優先、日常主力、複雜推理、長時間高難度工作」即可。</span>
+</div>
+
+<h3>如果只是想快速選</h3>
 <table>
-  <thead><tr><th>任務</th><th>Claude Code</th><th>ChatGPT</th></tr></thead>
+  <thead><tr><th>任務</th><th>Claude Code</th><th>GPT-5.6</th></tr></thead>
   <tbody>
     <tr><td>很小、很明確</td><td>Haiku / Sonnet</td><td>Luna，或 Sol 的 Instant</td></tr>
-    <tr><td>一般 coding</td><td>Sonnet</td><td>Sol</td></tr>
-    <tr><td>跨檔、架構、難 bug</td><td>Opus</td><td>Sol + 較高 reasoning</td></tr>
+    <tr><td>一般日常工作</td><td>Sonnet</td><td>Terra / Sol</td></tr>
+    <tr><td>跨檔、架構、難 bug</td><td>Opus</td><td>Sol + 較高推理強度</td></tr>
     <tr><td>很難、很長的任務</td><td>Fable 5</td><td>Sol Pro</td></tr>
   </tbody>
 </table>
 
-<h3>第二層：推理強度，不是換模型名稱</h3>
-<p>以目前 ChatGPT 的 GPT-5.6 為例，符合資格的付費方案可以調整推理投入程度。這比較像叫同一位工程師「快速回答」或「多花時間檢查」，而不是每一格都是完全不同的大腦。</p>
+<h3>第二層：推理強度（Reasoning）</h3>
+<p><strong>推理強度（Reasoning）</strong>不是另一顆模型，而是這次要讓模型投入多少思考。之後全站看到「推理強度」或英文 <code>Reasoning</code>，指的都是這個概念。</p>
 
 <table>
-  <thead><tr><th>選擇</th><th>適合情況</th></tr></thead>
+  <thead><tr><th>ChatGPT 選項</th><th>實際含義</th></tr></thead>
   <tbody>
-    <tr><td>Instant</td><td>日常問題、明確小修改、速度優先。</td></tr>
-    <tr><td>Medium</td><td>一般需要思考的 coding、分析與規劃。</td></tr>
-    <tr><td>High</td><td>複雜除錯、跨檔分析、重要決策。</td></tr>
-    <tr><td>Extra High</td><td>希望 GPT-5.6 Sol 投入最高等級推理的困難問題；是否可用取決於方案。</td></tr>
-    <tr><td>Pro</td><td>這一項會使用 GPT-5.6 Sol Pro，適合最難與較長時間的工作流程。</td></tr>
+    <tr><td>Instant</td><td>速度優先。符合資格的付費方案主要由 GPT-5.6 Sol 支援；Free / Go 則使用 GPT-5.6 Luna。</td></tr>
+    <tr><td>Medium</td><td>GPT-5.6 Sol 的標準推理強度。</td></tr>
+    <tr><td>High</td><td>GPT-5.6 Sol 的延伸推理強度，適合較複雜工作。</td></tr>
+    <tr><td>Extra High</td><td>GPT-5.6 Sol 可選的最高推理強度，是否可用取決於方案。</td></tr>
+    <tr><td>Pro</td><td><strong>這不是單純再提高推理強度。</strong>它會改用 GPT-5.6 Sol Pro，處理最難與較長時間的工作流程。</td></tr>
   </tbody>
 </table>
 
 <div class="note quiet">
-  <strong>不要什麼都開最高。</strong>
-  <span>改一個標題不需要最高推理；先分析一個陌生 Repo 為什麼壞掉，才值得提高 reasoning。速度、成本與任務難度要一起看。</span>
+  <strong>Free / Go 的 Think 也要分清楚。</strong>
+  <span>Think 是較需要思考時的選項，但目前使用 GPT-5.6 Luna，不等於付費方案的 Sol Medium / High。</span>
 </div>
 
-<h3>第三層：Plan / Execute 是工作模式</h3>
-<p>這層回答的不是「哪顆模型比較強」，而是「AI 現在可以做到哪一步」。</p>
+<div class="note quiet">
+  <strong>不要什麼都開最高。</strong>
+  <span>改一個標題不需要最高推理強度；先分析一個陌生 Repo 為什麼壞掉，才值得提高推理強度。速度、額度與任務難度要一起看。</span>
+</div>
+
+<h3>第三層：工作模式（Work Mode）</h3>
+<p>工作模式回答的不是「哪顆模型比較強」，而是「AI 現在能不能動手改專案」。</p>
 
 <table>
-  <thead><tr><th>工具</th><th>Plan</th><th>Execute / Default 類</th></tr></thead>
+  <thead><tr><th>工具</th><th>規劃模式（Plan Mode）</th><th>執行模式（Execute / Default）</th></tr></thead>
   <tbody>
     <tr><td>Claude Code</td><td>先讀檔、探索、研究與提出計畫，不先修改原始碼。</td><td>確認方向後，才進行檔案修改、執行與驗證。</td></tr>
     <tr><td>Codex</td><td>先做非破壞性探索與規劃。</td><td>確認方案後再真正修改專案。</td></tr>
@@ -83,16 +94,16 @@
 
 <div class="note quiet">
   <strong><code>opusplan</code> 到底是什麼？</strong>
-  <span>它不是一顆叫 opusplan 的模型，也不是 Plan Mode 本身。它是 Claude Code 的特殊模型設定：進入 Plan Mode 時使用 Opus，進入實作時切回 Sonnet。</span>
+  <span>它不是一顆叫 opusplan 的模型，也不是規劃模式（Plan Mode）本身。它是 Claude Code 的特殊模型設定：進入規劃模式時使用 Opus，進入實作時切回 Sonnet。</span>
 </div>
 
-<pre class="diagram">Model      = 哪顆腦
-Reasoning  = 這次想多久
-Work Mode  = 現在能不能動手改
-Agent      = 誰去讀檔、執行工具、完成任務
-Rules      = 專案 SOP</pre>
+<pre class="diagram">模型（Model）          = 哪顆腦
+推理強度（Reasoning）  = 這次想多久
+工作模式（Work Mode）  = 現在能不能動手改
+Agent（執行者）        = 誰去讀檔、執行工具、完成任務
+專案規則（Rules）      = 專案 SOP</pre>
 
 <div class="note">
   <strong>對新手最重要的不是記住所有型號。</strong>
-  <span>真正有用的是：小任務選快的；複雜問題換強模型或提高推理；範圍不清楚時先 Plan；確認方案後再 Execute。</span>
+  <span>真正有用的是：小任務選快的；複雜問題換強模型或提高推理強度；範圍不清楚時先用規劃模式；確認方案後再進執行模式。</span>
 </div>
