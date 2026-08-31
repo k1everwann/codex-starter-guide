@@ -1,0 +1,98 @@
+<!-- Loaded into #ai so model, reasoning level, and work mode stay clearly separated. -->
+<div class="section-label">01</div>
+<h2>先分清楚：模型、推理強度、工作模式</h2>
+<p class="section-lead">這三件事常常長在同一個選單裡，所以很容易混在一起。先記一個簡單原則：模型是「哪顆腦」、推理強度是「想多久」、工作模式是「現在能不能動手改專案」。</p>
+
+<dl class="definitions">
+  <div><dt>Model</dt><dd><strong>哪顆腦在想。</strong> 不同模型在速度、能力、成本與長任務表現上有不同定位。</dd></div>
+  <div><dt>Agent</dt><dd><strong>誰在做事。</strong> Codex / Claude Code 不只聊天，還能讀 Repo、改檔案、執行工具與測試。</dd></div>
+  <div><dt>Reasoning</dt><dd><strong>這次要想多久。</strong> 同一個模型通常可以用不同推理強度處理簡單或複雜工作。</dd></div>
+  <div><dt>Work Mode</dt><dd><strong>現在允許它做什麼。</strong> Plan 先研究與規劃；Execute / Default 類模式才進入實作。</dd></div>
+  <div><dt>Rules</dt><dd><strong>做事要遵守什麼。</strong> 固定規則放在 <code>AGENTS.md</code> 或 <code>CLAUDE.md</code>，不用每次重講。</dd></div>
+</dl>
+
+<h3>第一層：模型本身</h3>
+<p>先只看「這顆模型大概適合什麼」，不要把 Plan 或 High 之類的設定混進來。</p>
+
+<h3>Claude Code：模型怎麼選</h3>
+<table>
+  <thead><tr><th>模型</th><th>新手先這樣理解</th></tr></thead>
+  <tbody>
+    <tr><td>Haiku</td><td>快、效率高，適合明確的小任務與簡單修改。</td></tr>
+    <tr><td>Sonnet</td><td>日常 coding 的主力，速度與能力比較平衡。</td></tr>
+    <tr><td>Opus</td><td>複雜推理、架構、難除錯與跨檔分析。</td></tr>
+    <tr><td>Fable 5</td><td>最難、最長時間的自主工作；適合大型調查、root cause、架構決策，不是每個小任務都需要。</td></tr>
+  </tbody>
+</table>
+
+<h3>ChatGPT：GPT-5.6 模型怎麼看</h3>
+<table>
+  <thead><tr><th>模型</th><th>新手先這樣理解</th></tr></thead>
+  <tbody>
+    <tr><td>GPT-5.6 Luna</td><td>效率取向。Free / Go 的日常預設與 Think 主要使用 Luna。</td></tr>
+    <tr><td>GPT-5.6 Sol</td><td>旗艦主力。適合 coding、研究、規劃與比較複雜的知識工作；符合資格的付費方案會用它支援多個推理強度。</td></tr>
+    <tr><td>GPT-5.6 Sol Pro</td><td>最高能力取向，適合很難或需要較長時間完成的工作流程。</td></tr>
+  </tbody>
+</table>
+
+<div class="note quiet">
+  <strong>不用硬把 Claude 和 GPT 做一對一配對。</strong>
+  <span>它們不是同一家公司、也不是同一套 benchmark。第一階段只需要知道任務大概是「快的小事、日常主力、複雜推理、超難長任務」哪一種。</span>
+</div>
+
+<h3>如果只是想快速選，可以先這樣</h3>
+<table>
+  <thead><tr><th>任務</th><th>Claude Code</th><th>ChatGPT</th></tr></thead>
+  <tbody>
+    <tr><td>很小、很明確</td><td>Haiku / Sonnet</td><td>Luna，或 Sol 的 Instant</td></tr>
+    <tr><td>一般 coding</td><td>Sonnet</td><td>Sol</td></tr>
+    <tr><td>跨檔、架構、難 bug</td><td>Opus</td><td>Sol + 較高 reasoning</td></tr>
+    <tr><td>很難、很長的任務</td><td>Fable 5</td><td>Sol Pro</td></tr>
+  </tbody>
+</table>
+
+<h3>第二層：推理強度，不是換模型名稱</h3>
+<p>以目前 ChatGPT 的 GPT-5.6 為例，符合資格的付費方案可以調整推理投入程度。這比較像叫同一位工程師「快速回答」或「多花時間檢查」，而不是每一格都是完全不同的大腦。</p>
+
+<table>
+  <thead><tr><th>選擇</th><th>適合情況</th></tr></thead>
+  <tbody>
+    <tr><td>Instant</td><td>日常問題、明確小修改、速度優先。</td></tr>
+    <tr><td>Medium</td><td>一般需要思考的 coding、分析與規劃。</td></tr>
+    <tr><td>High</td><td>複雜除錯、跨檔分析、重要決策。</td></tr>
+    <tr><td>Extra High</td><td>希望 GPT-5.6 Sol 投入最高等級推理的困難問題；是否可用取決於方案。</td></tr>
+    <tr><td>Pro</td><td>這一項會使用 GPT-5.6 Sol Pro，適合最難與較長時間的工作流程。</td></tr>
+  </tbody>
+</table>
+
+<div class="note quiet">
+  <strong>不要什麼都開最高。</strong>
+  <span>改一個標題不需要最高推理；先分析一個陌生 Repo 為什麼壞掉，才值得提高 reasoning。速度、成本與任務難度要一起看。</span>
+</div>
+
+<h3>第三層：Plan / Execute 是工作模式</h3>
+<p>這層回答的不是「哪顆模型比較強」，而是「AI 現在可以做到哪一步」。</p>
+
+<table>
+  <thead><tr><th>工具</th><th>Plan</th><th>Execute / Default 類</th></tr></thead>
+  <tbody>
+    <tr><td>Claude Code</td><td>先讀檔、探索、研究與提出計畫，不先修改原始碼。</td><td>確認方向後，才進行檔案修改、執行與驗證。</td></tr>
+    <tr><td>Codex</td><td>先做非破壞性探索與規劃。</td><td>確認方案後再真正修改專案。</td></tr>
+  </tbody>
+</table>
+
+<div class="note quiet">
+  <strong><code>opusplan</code> 到底是什麼？</strong>
+  <span>它不是一顆叫 opusplan 的模型，也不是 Plan Mode 本身。它是 Claude Code 的特殊模型設定：進入 Plan Mode 時使用 Opus，進入實作時切回 Sonnet。</span>
+</div>
+
+<pre class="diagram">Model      = 哪顆腦
+Reasoning  = 這次想多久
+Work Mode  = 現在能不能動手改
+Agent      = 誰去讀檔、執行工具、完成任務
+Rules      = 專案 SOP</pre>
+
+<div class="note">
+  <strong>對新手最重要的不是記住所有型號。</strong>
+  <span>真正有用的是：小任務選快的；複雜問題換強模型或提高推理；範圍不清楚時先 Plan；確認方案後再 Execute。</span>
+</div>
