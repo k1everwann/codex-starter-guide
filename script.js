@@ -1,5 +1,12 @@
+const ASSET_VERSION = '20260831-2';
+
+function versioned(path) {
+  const separator = path.includes('?') ? '&' : '?';
+  return `${path}${separator}v=${ASSET_VERSION}`;
+}
+
 async function fetchFragment(path) {
-  const response = await fetch(path);
+  const response = await fetch(versioned(path), { cache: 'no-store' });
   if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
 
   const wrapper = document.createElement('div');
@@ -30,6 +37,23 @@ function loadLocalScript(src) {
   });
 }
 
+function loadLocalStylesheet(href) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`link[href="${href}"]`);
+    if (existing) {
+      resolve();
+      return;
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.addEventListener('load', resolve, { once: true });
+    link.addEventListener('error', reject, { once: true });
+    document.head.appendChild(link);
+  });
+}
+
 async function loadGitPractice() {
   const git = document.querySelector('#git');
   if (!git) return;
@@ -47,7 +71,9 @@ async function loadPlaygrounds() {
   if (!python || !data) return;
 
   try {
-    const response = await fetch('./playgrounds.html');
+    await loadLocalStylesheet(versioned('./playgrounds.css'));
+
+    const response = await fetch(versioned('./playgrounds.html'), { cache: 'no-store' });
     if (!response.ok) throw new Error(`playgrounds.html: HTTP ${response.status}`);
 
     const wrapper = document.createElement('div');
@@ -58,7 +84,7 @@ async function loadPlaygrounds() {
     if (pythonPlayground) python.after(pythonPlayground);
     if (sqlPlayground) data.after(sqlPlayground);
 
-    await loadLocalScript('./playgrounds.js');
+    await loadLocalScript(versioned('./playgrounds.js'));
     window.initInteractivePlaygrounds?.();
   } catch (error) {
     console.error('Failed to load interactive playgrounds:', error);
