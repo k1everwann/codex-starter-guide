@@ -1,7 +1,7 @@
 <section id="git-practice">
   <div class="section-label">03.1 · 10 分鐘實作</div>
   <h2>第一次 Git 流程：只改一句話就好</h2>
-  <p class="section-lead">不用 Terminal，也不用寫新功能。拿你自己的旅遊網站 Repo，完整走一次 Branch → Commit → Pull Request → Merge，就已經很有價值。</p>
+  <p class="section-lead">不用 Terminal，也不用寫新功能。拿你自己的旅遊網站 Repo，完整走一次<strong>分支（Branch）→ 提交（Commit）→ Pull Request（PR）→ 合併（Merge）</strong>，就已經很有價值。</p>
 
   <div class="note">
     <strong>今天的任務很小</strong>
@@ -9,27 +9,27 @@
   </div>
 
   <ol class="practice-steps">
-    <li><strong>先開一張 Issue</strong><span>標題可以是「首頁加入最後更新日期」。Issue 就是這次工作的說明單。</span></li>
-    <li><strong>從 <code>main</code> 建一個 Branch</strong><span>例如 <code>feature/home-update-note</code>。把它想成另外開一個安全施工區。</span></li>
-    <li><strong>先叫 AI Plan</strong><span>把 Issue 丟給 Codex / Claude，要求「先說會改哪個檔案，不要立刻修改」。</span></li>
-    <li><strong>只做這一個小修改</strong><span>確認 Plan 沒問題，再讓 AI 修改。Commit message 可以寫 <code>Add homepage update note</code>。</span></li>
-    <li><strong>開 Pull Request，看 Diff</strong><span>先看綠色新增、紅色刪除。看得懂「這次到底改了什麼」比背 Git 指令重要。</span></li>
-    <li><strong>Merge 回 <code>main</code></strong><span>確認網站沒壞，再 Merge。若有 GitHub Pages，等一下就會看到正式網站更新。</span></li>
+    <li><strong>先開一張工作單（Issue）</strong><span>標題可以是「首頁加入最後更新日期」。Issue 就是這次工作的說明單。</span></li>
+    <li><strong>從 <code>main</code> 建一個分支（Branch）</strong><span>例如 <code>feature/home-update-note</code>。把它想成另外開一個安全施工區。</span></li>
+    <li><strong>先叫 AI 做規劃（Plan）</strong><span>把 Issue 丟給 Codex / Claude，要求「先說會改哪個檔案，不要立刻修改」。</span></li>
+    <li><strong>只做這一個小修改</strong><span>確認規劃沒問題，再讓 AI 修改。提交訊息（Commit message）可以寫 <code>Add homepage update note</code>。</span></li>
+    <li><strong>開 Pull Request（PR），看差異（Diff）</strong><span>先看綠色新增、紅色刪除。看得懂「這次到底改了什麼」比背 Git 指令重要。</span></li>
+    <li><strong>合併（Merge）回 <code>main</code></strong><span>確認網站沒壞，再 Merge。若有 GitHub Pages，等一下就會看到正式網站更新。</span></li>
   </ol>
 
   <div class="figure-grid">
     <figure class="guide-figure">
       <img src="https://docs.github.com/assets/cb-16584/images/help/branches/branch-selection-dropdown-global-nav-update.png" alt="GitHub Repository 的 main branch 下拉選單" loading="lazy" />
-      <figcaption>先找到 <code>main</code> 的 Branch 選單，再建立自己的施工分支。圖片：GitHub Docs。</figcaption>
+      <figcaption>先找到 <code>main</code> 的分支（Branch）選單，再建立自己的施工分支。圖片：GitHub Docs。</figcaption>
     </figure>
     <figure class="guide-figure">
       <img src="https://docs.github.com/assets/cb-32937/images/help/repository/diffs.png" alt="GitHub Pull Request 的紅綠 Diff 畫面" loading="lazy" />
-      <figcaption>Pull Request 最重要的不是按 Merge，而是先看 Diff：紅色是刪除，綠色是新增。圖片：GitHub Docs。</figcaption>
+      <figcaption>Pull Request 最重要的不是按 Merge，而是先看差異（Diff）：紅色是刪除，綠色是新增。圖片：GitHub Docs。</figcaption>
     </figure>
   </div>
 
   <div class="checkpoint">
     <strong>✓ 這一關怎樣算完成？</strong>
-    <span>你有一張 Issue、一個不是 <code>main</code> 的 Branch、一個 Commit、一個 Pull Request，而且最後成功 Merge。程式只改一行也完全可以。</span>
+    <span>你有一張工作單（Issue）、一個不是 <code>main</code> 的分支、一個提交（Commit）、一個 Pull Request，而且最後成功合併（Merge）。程式只改一行也完全可以。</span>
   </div>
 </section>
