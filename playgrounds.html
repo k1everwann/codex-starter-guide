@@ -14,7 +14,11 @@
       <strong>Python</strong>
       <span class="runtime-status" id="python-status">第一次 Run 會載入 Python</span>
     </div>
-    <textarea id="python-code" class="code-editor" spellcheck="false" aria-label="Python 程式碼">trips = [
+    <div class="editor-hint">
+      <strong>可直接修改</strong>
+      <span>點進下面的藍色區域，試著把 <code>&gt; 5</code> 改成 <code>&gt;= 5</code></span>
+    </div>
+    <textarea id="python-code" class="code-editor" spellcheck="false" aria-label="可直接修改的 Python 程式碼">trips = [
     {"city": "Hokkaido", "days": 7, "budget": 42000},
     {"city": "Tokyo", "days": 5, "budget": 28000},
     {"city": "Chiang Mai", "days": 4, "budget": 18000}
@@ -29,7 +33,7 @@ for trip in trips:
       <button type="button" class="plain-button" id="python-challenge">給我一個小挑戰</button>
     </div>
     <div class="challenge-box" id="python-challenge-text">先按 Run。現在的條件是 <code>days &gt; 5</code>，猜猜會印出哪個地方？</div>
-    <div class="output-label">Output</div>
+    <div class="output-label">Output · 執行結果</div>
     <pre class="playground-output" id="python-output">還沒有執行。</pre>
   </div>
 
@@ -60,7 +64,11 @@ for trip in trips:
       <strong>SQLite / SQL</strong>
       <span class="runtime-status" id="sql-status">第一次 Run 會載入 SQLite</span>
     </div>
-    <textarea id="sql-code" class="code-editor sql-editor" spellcheck="false" aria-label="SQL 查詢">SELECT city, days, budget
+    <div class="editor-hint">
+      <strong>可直接修改</strong>
+      <span>點進下面的藍色區域，修改 SQL 後再按 Run</span>
+    </div>
+    <textarea id="sql-code" class="code-editor sql-editor" spellcheck="false" aria-label="可直接修改的 SQL 查詢">SELECT city, days, budget
 FROM trips
 WHERE days > 5;</textarea>
     <div class="playground-actions">
@@ -69,7 +77,7 @@ WHERE days > 5;</textarea>
       <button type="button" class="plain-button" id="sql-challenge">給我一個小挑戰</button>
     </div>
     <div class="challenge-box" id="sql-challenge-text">先按 Run。這句 SQL 在問：「哪一趟旅行超過 5 天？」</div>
-    <div class="output-label">Result</div>
+    <div class="output-label">Result · 查詢結果</div>
     <div class="sql-result" id="sql-output"><span class="empty-output">還沒有執行。</span></div>
   </div>
 
