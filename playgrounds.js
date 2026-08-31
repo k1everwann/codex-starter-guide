@@ -34,6 +34,14 @@ WHERE days > 5;`;
   let pythonChallengeIndex = 0;
   let sqlChallengeIndex = 0;
 
+  function ensureStyles() {
+    if (document.querySelector('link[href="./playgrounds.css"]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = './playgrounds.css';
+    document.head.appendChild(link);
+  }
+
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[src="${src}"]`);
@@ -221,6 +229,7 @@ WHERE days > 5;`;
   }
 
   window.initInteractivePlaygrounds = function initInteractivePlaygrounds() {
+    ensureStyles();
     initPython();
     initSqlPlayground();
   };
