@@ -1,0 +1,80 @@
+<section id="python-playground" class="playground-section">
+  <div class="section-label">05.1 · Try it</div>
+  <h2>改一行 Python，直接看結果</h2>
+  <p class="section-lead">不用先背語法。先看懂資料，改一個條件，再按 Run。Python 會直接在你的瀏覽器裡執行。</p>
+
+  <div class="trip-data" aria-label="練習資料">
+    <div><span>Hokkaido</span><b>7 天</b><small>42,000</small></div>
+    <div><span>Tokyo</span><b>5 天</b><small>28,000</small></div>
+    <div><span>Chiang Mai</span><b>4 天</b><small>18,000</small></div>
+  </div>
+
+  <div class="playground" data-playground="python">
+    <div class="playground-head">
+      <strong>Python</strong>
+      <span class="runtime-status" id="python-status">第一次 Run 會載入 Python</span>
+    </div>
+    <textarea id="python-code" class="code-editor" spellcheck="false" aria-label="Python 程式碼">trips = [
+    {"city": "Hokkaido", "days": 7, "budget": 42000},
+    {"city": "Tokyo", "days": 5, "budget": 28000},
+    {"city": "Chiang Mai", "days": 4, "budget": 18000}
+]
+
+for trip in trips:
+    if trip["days"] > 5:
+        print(trip["city"])</textarea>
+    <div class="playground-actions">
+      <button type="button" class="run-button" id="python-run">Run ▶</button>
+      <button type="button" class="plain-button" id="python-reset">Reset</button>
+      <button type="button" class="plain-button" id="python-challenge">給我一個小挑戰</button>
+    </div>
+    <div class="challenge-box" id="python-challenge-text">先按 Run。現在的條件是 <code>days &gt; 5</code>，猜猜會印出哪個地方？</div>
+    <div class="output-label">Output</div>
+    <pre class="playground-output" id="python-output">還沒有執行。</pre>
+  </div>
+
+  <div class="checkpoint">
+    <strong>✓ 這裡只要學會一件事</strong>
+    <span>把 <code>&gt; 5</code> 改成 <code>&gt;= 5</code> 再 Run。看到 Tokyo 多出來，就已經理解「條件改變 → 程式結果改變」。</span>
+  </div>
+</section>
+
+<section id="sql-playground" class="playground-section">
+  <div class="section-label">06.1 · Try it</div>
+  <h2>用 SQL 問旅行資料一個問題</h2>
+  <p class="section-lead">SQL 可以先理解成「用一句話問資料表問題」。這裡是一個真的 SQLite database，而且完全在瀏覽器裡執行。</p>
+
+  <div class="table-scroll">
+    <table class="sample-table">
+      <thead><tr><th>id</th><th>city</th><th>days</th><th>budget</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Hokkaido</td><td>7</td><td>42000</td></tr>
+        <tr><td>2</td><td>Tokyo</td><td>5</td><td>28000</td></tr>
+        <tr><td>3</td><td>Chiang Mai</td><td>4</td><td>18000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="playground" data-playground="sql">
+    <div class="playground-head">
+      <strong>SQLite / SQL</strong>
+      <span class="runtime-status" id="sql-status">第一次 Run 會載入 SQLite</span>
+    </div>
+    <textarea id="sql-code" class="code-editor sql-editor" spellcheck="false" aria-label="SQL 查詢">SELECT city, days, budget
+FROM trips
+WHERE days > 5;</textarea>
+    <div class="playground-actions">
+      <button type="button" class="run-button" id="sql-run">Run ▶</button>
+      <button type="button" class="plain-button" id="sql-reset">Reset</button>
+      <button type="button" class="plain-button" id="sql-challenge">給我一個小挑戰</button>
+    </div>
+    <div class="challenge-box" id="sql-challenge-text">先按 Run。這句 SQL 在問：「哪一趟旅行超過 5 天？」</div>
+    <div class="output-label">Result</div>
+    <div class="sql-result" id="sql-output"><span class="empty-output">還沒有執行。</span></div>
+  </div>
+
+  <div class="checkpoint">
+    <strong>✓ 下一個小實驗</strong>
+    <span>把 <code>days &gt; 5</code> 改成 <code>days &gt;= 5</code>。如果 Result 從 Hokkaido 變成 Hokkaido + Tokyo，你已經理解最重要的 <code>WHERE</code> 概念。</span>
+  </div>
+</section>
