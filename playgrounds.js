@@ -42,6 +42,41 @@ WHERE days > 5;`;
     document.head.appendChild(link);
   }
 
+  function alignStaticExamples() {
+    const conceptCodes = document.querySelectorAll('#python .concept-list code');
+    if (conceptCodes.length >= 3) {
+      conceptCodes[0].textContent = 'city = "Hokkaido"';
+      conceptCodes[1].textContent = '["Hokkaido", "Tokyo", "Chiang Mai"]';
+      conceptCodes[2].textContent = '{"city": "Tokyo"}';
+    }
+
+    const pythonExample = document.querySelector('#python pre code');
+    if (pythonExample) {
+      pythonExample.textContent = `trips = [
+    {"city": "Hokkaido", "days": 7},
+    {"city": "Tokyo", "days": 5},
+    {"city": "Chiang Mai", "days": 4}
+]
+
+for trip in trips:
+    if trip["days"] > 5:
+        print(trip["city"])`;
+    }
+
+    const dataExamples = document.querySelectorAll('#data .split pre code');
+    if (dataExamples[0]) {
+      dataExamples[0].textContent = '<h2>Hokkaido</h2>\n<p>7 days</p>';
+    }
+    if (dataExamples[1]) {
+      dataExamples[1].textContent = `trips
+--------------------------------
+id | city       | days | budget
+1  | Hokkaido   | 7    | 42000
+2  | Tokyo      | 5    | 28000
+3  | Chiang Mai | 4    | 18000`;
+    }
+  }
+
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[src="${src}"]`);
@@ -230,6 +265,7 @@ WHERE days > 5;`;
 
   window.initInteractivePlaygrounds = function initInteractivePlaygrounds() {
     ensureStyles();
+    alignStaticExamples();
     initPython();
     initSqlPlayground();
   };
