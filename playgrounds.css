@@ -25,7 +25,7 @@
 .playground {
   margin: 24px 0;
   overflow: hidden;
-  border: 1px solid #ddddda;
+  border: 1px solid #c7d8f2;
   border-radius: 10px;
   background: #fff;
 }
@@ -36,8 +36,8 @@
   gap: 18px;
   align-items: center;
   padding: 10px 13px;
-  border-bottom: 1px solid var(--line);
-  background: #fafafa;
+  border-bottom: 1px solid #dbe5f3;
+  background: #f8faff;
 }
 
 .playground-head strong {
@@ -47,8 +47,35 @@
 }
 
 .runtime-status {
-  color: #929292;
+  color: #7d8796;
   font-size: 11px;
+}
+
+.editor-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border-bottom: 1px solid #cbdcf5;
+  background: #eaf2ff;
+  color: #405a78;
+  font-size: 12px;
+}
+
+.editor-hint strong {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border: 1px solid #8fb1e4;
+  border-radius: 999px;
+  background: #fff;
+  color: #2457a6;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.editor-hint code {
+  background: rgba(255,255,255,.72);
+  color: #214f91;
 }
 
 .code-editor {
@@ -56,21 +83,31 @@
   width: 100%;
   min-height: 255px;
   resize: vertical;
-  padding: 17px 18px;
+  padding: 18px 19px;
   border: 0;
-  border-bottom: 1px solid var(--line);
+  border-left: 4px solid #8db2e8;
+  border-bottom: 1px solid #cbdcf5;
   outline: 0;
-  background: #fbfbfa;
-  color: #242424;
+  background: #f4f8ff;
+  color: #1e2b3b;
+  caret-color: #2457c5;
+  cursor: text;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 13px;
   line-height: 1.65;
   tab-size: 4;
+  transition: background .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.code-editor:hover {
+  background: #eef5ff;
+  border-left-color: #5f8fd5;
 }
 
 .code-editor:focus {
   background: #fff;
-  box-shadow: inset 0 0 0 1px #bdbdbd;
+  border-left-color: #2457c5;
+  box-shadow: inset 0 0 0 2px #7ea7e4;
 }
 
 .sql-editor { min-height: 140px; }
@@ -81,6 +118,7 @@
   gap: 8px;
   padding: 12px 13px;
   border-bottom: 1px solid var(--line);
+  background: #fff;
 }
 
 .playground-actions button {
@@ -99,11 +137,13 @@
 }
 
 .run-button {
-  border-color: #222 !important;
-  background: #222;
+  border-color: #2457c5 !important;
+  background: #2457c5;
   color: #fff;
   font-weight: 650 !important;
 }
+
+.run-button:hover:not(:disabled) { background: #1e4baa; }
 
 .plain-button {
   background: #fff;
@@ -115,7 +155,7 @@
 .challenge-box {
   padding: 12px 14px;
   border-bottom: 1px solid var(--line);
-  background: #fffdf7;
+  background: #fffdf0;
   color: #655e4d;
   font-size: 13px;
 }
@@ -143,6 +183,7 @@
   min-height: 76px;
   padding: 8px 14px 16px;
   overflow-x: auto;
+  background: #fff;
 }
 
 .empty-output {
@@ -184,6 +225,7 @@
     align-items: center;
     gap: 12px;
   }
+  .editor-hint { align-items: flex-start; flex-direction: column; gap: 5px; }
   .code-editor { min-height: 290px; font-size: 12px; }
   .sql-editor { min-height: 150px; }
   .playground-head { align-items: flex-start; flex-direction: column; gap: 2px; }
