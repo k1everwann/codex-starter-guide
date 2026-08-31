@@ -12,11 +12,16 @@ Repo：<https://github.com/k1everwann/codex-starter-guide>
 
 ```text
 codex-starter-guide/
-├─ index.html                    ← 主教學網站
+├─ index.html                    ← 主教學網站骨架
+├─ git-practice.html             ← Git / PR 小實作
+├─ playgrounds.html              ← Python / SQL 互動練習內容
 ├─ lab-content.html              ← 同一頁載入的完整 Hands-on Lab
+├─ final-challenge.html          ← 最後挑戰
 ├─ google-workspace-lab.html     ← 舊網址相容轉址
-├─ styles.css                    ← 外觀、排版、RWD
-├─ script.js                     ← 載入 Lab + 左側導覽互動
+├─ styles.css                    ← 主網站外觀、排版、RWD
+├─ playgrounds.css               ← 互動練習區樣式
+├─ script.js                     ← 組合頁面片段 + 左側導覽互動
+├─ playgrounds.js                ← 在瀏覽器執行 Python / SQLite
 ├─ README.md                     ← 給第一次進 Repo 的人看
 ├─ PROJECT-ARCHITECTURE.md       ← 你正在看的專案導讀
 ├─ AGENTS.md                     ← Codex 的專案規則
@@ -34,10 +39,12 @@ codex-starter-guide/
 先記住最重要的分工：
 
 ```text
-index.html          = 主頁內容與章節骨架
-lab-content.html    = Hands-on Lab 的詳細步驟
-styles.css          = 外觀
-script.js           = 載入 Lab 與導覽互動
+index.html          = 主頁骨架
+內容片段             = Git 練習 / Playground / Hands-on / Final Challenge
+styles.css          = 主站外觀
+playgrounds.css     = 可編輯練習區外觀
+script.js           = 把內容片段組回同一頁
+playgrounds.js      = 讓 Python / SQLite 在 Browser 執行
 README              = 給人看的入口
 AGENTS              = 給 Codex 的 SOP
 CLAUDE              = 給 Claude Code 的 SOP
@@ -48,33 +55,64 @@ Pages               = 把 main 的靜態網站發布到 Internet
 
 ---
 
-## 2. 為什麼 Lab 拆成 `lab-content.html`，但讀者只看到一個網站？
+## 2. 為什麼內容拆成多個 HTML，但讀者只看到一個網站？
 
-這裡刻意示範一個很常見的概念：**檔案可以拆開維護，使用者不一定要看到多個頁面。**
+這裡刻意示範一個常見概念：**程式可以拆檔維護，使用者不一定要看到多個頁面。**
 
 ```text
 index.html
    │
    │ script.js 載入
-   ▼
-lab-content.html
-   │
-   ▼
-同一個主頁往下繼續閱讀
+   ├────────► git-practice.html
+   ├────────► playgrounds.html
+   ├────────► lab-content.html
+   └────────► final-challenge.html
+                   │
+                   ▼
+            同一個主頁往下閱讀
 ```
 
 所以：
 
-- `index.html` 負責整體教材與 Hands-on 入口。
-- `lab-content.html` 放 09.1～09.10 的詳細實作。
-- `script.js` 把 Lab 插到主頁 Hands-on 區塊後面。
-- `google-workspace-lab.html` 只保留給舊網址使用，會導回主網站。
+- `index.html` 負責主要章節與整體順序。
+- `git-practice.html` 放 10 分鐘 Git / PR 實作。
+- `playgrounds.html` 放 Python / SQL 的可編輯介面。
+- `lab-content.html` 放 09.1～09.10 的 Google Workspace 詳細實作。
+- `final-challenge.html` 放最後的作品檢查清單。
+- `script.js` 把以上內容插回主頁正確位置。
+- `google-workspace-lab.html` 只保留舊網址相容，會導回主網站。
 
-這樣既不需要維護兩套教學網站，也不必把一個 HTML 檔塞得非常巨大。
+這樣既不需要維護多套教學網站，也不必把一個 HTML 檔塞得非常巨大。
 
 ---
 
-## 3. 這個網站怎麼從程式碼變成公開網址？
+## 3. 互動式 Python / SQL 為什麼 GitHub Pages 也能做？
+
+GitHub Pages 本身不能執行 Python server 或 SQLite server，但 Browser 可以執行 WebAssembly。
+
+這個專案因此把練習做成：
+
+```text
+Browser
+   ├─ Pyodide → Python
+   └─ sql.js   → SQLite
+```
+
+`playgrounds.js` 只在第一次按 Run 時載入 runtime，避免一開網站就下載不必要的資源。
+
+練習資料統一使用：
+
+```text
+Hokkaido   7 days   42000
+Tokyo      5 days   28000
+Chiang Mai 4 days   18000
+```
+
+這讓 Python 與 SQL 可以用同一份情境理解條件、篩選與資料表。
+
+---
+
+## 4. 這個網站怎麼從程式碼變成公開網址？
 
 ```text
 你 / Codex / Claude
@@ -100,7 +138,7 @@ GitHub Pages 不是另一份網站；它發布的來源就是這個 Repo 裡的�
 
 ---
 
-## 4. 從 GitHub 頁面開始學
+## 5. 從 GitHub 頁面開始學
 
 ### 第一步：看 `index.html`
 
@@ -108,13 +146,37 @@ GitHub Pages 不是另一份網站；它發布的來源就是這個 Repo 裡的�
 
 不用看懂所有 HTML。先找網站上真的看得到的一句文字或一個章節標題，你會發現：**瀏覽器顯示的內容，本來就存在程式碼裡。**
 
-### 第二步：看 `lab-content.html`
+### 第二步：看 `script.js`
 
-<https://github.com/k1everwann/codex-starter-guide/blob/main/lab-content.html>
+<https://github.com/k1everwann/codex-starter-guide/blob/main/script.js>
 
-這裡放的是主網站後半段的完整 Gmail / Drive Hands-on Lab。你在公開網站看到它像同一頁，但 Repo 裡其實已經把內容拆檔。
+目前 JavaScript 會：
 
-### 第三步：看 `styles.css`
+1. 載入 Git 小實作。
+2. 載入 Python / SQL Playground。
+3. 載入完整 Google Workspace Lab。
+4. 載入 Final Challenge。
+5. 根據閱讀位置高亮左側導覽。
+
+這是一個很好的例子：**JavaScript 不一定要很複雜，但可以負責把不同檔案組成一個完整體驗。**
+
+### 第三步：看 `playgrounds.js`
+
+<https://github.com/k1everwann/codex-starter-guide/blob/main/playgrounds.js>
+
+先不用看懂全部。只要知道它做兩件事：
+
+```text
+Run Python
+→ 把 textarea 裡的文字交給 Pyodide
+→ 顯示 Output
+
+Run SQL
+→ 把 textarea 裡的 SQL 交給 sql.js
+→ 顯示 Result table
+```
+
+### 第四步：看 `styles.css`
 
 <https://github.com/k1everwann/codex-starter-guide/blob/main/styles.css>
 
@@ -123,25 +185,15 @@ GitHub Pages 不是另一份網站；它發布的來源就是這個 Repo 裡的�
 ```text
 .sidebar
 .content
-section
+.split
+.prompt-grid
 ```
 
-HTML 描述內容與區塊；真正的寬度、留白、字體、邊線與手機版配置由 CSS 決定。
-
-### 第四步：看 `script.js`
-
-<https://github.com/k1everwann/codex-starter-guide/blob/main/script.js>
-
-目前 JavaScript 主要做兩件事：
-
-1. 用 `fetch('./lab-content.html')` 把完整 Lab 載入主頁。
-2. 根據閱讀位置高亮左側導覽。
-
-這是一個很好的例子：**JavaScript 不一定要很複雜，但可以負責把不同檔案組成一個完整體驗。**
+HTML 描述內容與區塊；真正的寬度、留白、字體、雙欄等高與手機版配置由 CSS 決定。
 
 ---
 
-## 5. README、AGENTS.md、CLAUDE.md 為什麼都要存在？
+## 6. README、AGENTS.md、CLAUDE.md 為什麼都要存在？
 
 | 檔案 | 主要讀者 | 回答的問題 |
 |---|---|---|
@@ -165,7 +217,7 @@ AGENTS.md / CLAUDE.md
 
 ---
 
-## 6. Git 真正要學的是「差異」，不是指令
+## 7. Git 真正要學的是「差異」，不是指令
 
 打開 Commit 歷史：
 <https://github.com/k1everwann/codex-starter-guide/commits/main/>
@@ -183,7 +235,7 @@ AGENTS.md / CLAUDE.md
 
 ---
 
-## 7. Branch 和 Pull Request 可以怎麼想？
+## 8. Branch 和 Pull Request 可以怎麼想？
 
 ```text
 main
@@ -213,7 +265,7 @@ main ───────────────────────●─
 
 ---
 
-## 8. 可以直接拿這個 Repo 問 AI
+## 9. 可以直接拿這個 Repo 問 AI
 
 ```text
 請先不要修改程式。
@@ -223,10 +275,10 @@ https://github.com/k1everwann/codex-starter-guide
 
 請告訴我：
 1. 專案入口是哪個檔案？
-2. index.html 與 lab-content.html 為什麼分開？
-3. styles.css 與 script.js 分別負責什麼？
-4. README.md、AGENTS.md、CLAUDE.md 的用途有何不同？
-5. GitHub Pages 如何把這個 Repo 變成網站？
+2. index.html 為什麼沒有塞進全部教學內容？
+3. script.js 會載入哪些內容片段？
+4. playgrounds.js 為什麼能在 Browser 執行 Python / SQLite？
+5. README.md、AGENTS.md、CLAUDE.md 的用途有何不同？
 6. 如果我要新增一個 Hands-on 步驟，你預計修改哪些檔案？
 ```
 
@@ -234,7 +286,7 @@ https://github.com/k1everwann/codex-starter-guide
 
 ---
 
-## 9. 之後自己的旅遊網站也可以長這樣
+## 10. 之後自己的旅遊網站也可以長這樣
 
 一開始：
 
